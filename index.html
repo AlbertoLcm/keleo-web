@@ -1,30 +1,78 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es-MX" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keleo App | Gestión Gastronómica Inteligente</title>
+    
+    <!-- SEO: Meta Tags Principales -->
+    <title>Keleo App | Software de Gestión para Restaurantes y Bares</title>
+    <meta name="description" content="Keleo App es la plataforma integral para administrar restaurantes, cafeterías y bares. Toma de pedidos ágil, control de inventario y análisis de ventas en tiempo real.">
+    <meta name="keywords" content="software restaurante, app comandas, sistema punto de venta, gestion gastronomica, app para meseros, keleo app">
+    <meta name="author" content="Keleo App">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.keleoapp.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.keleoapp.com/">
+    <meta property="og:title" content="Keleo App | Transforma tu Restaurante">
+    <meta property="og:description" content="Gestiona pedidos, cocina y finanzas desde una sola app. La solución tecnológica para el sector gastronómico en Latinoamérica.">
+    <meta property="og:image" content="https://www.keleoapp.com/assets/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.keleoapp.com/">
+    <meta property="twitter:title" content="Keleo App | Software de Gestión Gastronómica">
+    <meta property="twitter:description" content="Optimiza la operación de tu restaurante con Keleo. Pedidos sin papel y control total.">
+    <meta property="twitter:image" content="https://www.keleoapp.com/assets/og-image.jpg">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/keleo.png">
+
+    <!-- Estilos y Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Schema Markup (JSON-LD) para Software App -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Keleo App",
+      "operatingSystem": "Web, iOS, Android",
+      "applicationCategory": "BusinessApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "500"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "199.00",
+        "priceCurrency": "MXN"
+      },
+      "description": "Solución tecnológica integral diseñada para transformar la manera en que los restaurantes gestionan sus pedidos, operaciones y finanzas."
+    }
+    </script>
+
     <script>
         tailwind.config = {
-            darkMode: 'class', // Habilitar modo oscuro por clase
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         keleo: {
-                            50: '#f5f3ff',
+                            50:  '#f5f3ff',
                             100: '#ede9fe',
-                            500: '#8b5cf6', // Violeta principal
+                            500: '#8b5cf6',
                             600: '#7c3aed',
                             700: '#6d28d9',
                             900: '#4c1d95',
                         },
                         dark: {
-                            bg: '#0f172a', // Slate 900
-                            card: '#1e293b', // Slate 800
-                            text: '#f8fafc' // Slate 50
+                            bg:   '#0f172a',
+                            card: '#1e293b',
+                            text: '#f8fafc'
                         }
                     },
                     animation: {
@@ -35,513 +83,438 @@
         }
     </script>
     <style>
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-        }
-        .dark .glass-effect {
-            background: rgba(15, 23, 42, 0.9); /* Dark background for glass effect */
-        }
-        html { scroll-behavior: smooth; }
-        
-        /* Transición suave para cambio de tema */
-        body, div, nav, section, h1, h2, h3, p, span, a, button {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
+        .glass-effect { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .dark .glass-effect { background: rgba(15, 23, 42, 0.9); }
+        /* Mejora de accesibilidad en foco */
+        *:focus-visible { outline: 2px solid #7c3aed; outline-offset: 2px; }
     </style>
 </head>
-<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 overflow-x-hidden">
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 overflow-x-hidden flex flex-col min-h-screen">
 
     <!-- NAV -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 dark:bg-dark-bg/90 backdrop-blur-md shadow-sm dark:shadow-slate-800/50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-2 group">
-                <!-- Logo Container -->
-                <!-- <div class="w-10 h-10 bg-keleo-600 rounded-lg flex items-center justify-center text-white text-xl shadow-lg group-hover:bg-keleo-700 transition">
-                  <i class="fas fa-utensils"></i>
-                </div> -->
-                <img src="assets/keleo.png" alt="keleo" srcset="" width="30">
-                <span class="text-2xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600">App</span></span>
-            </a>
-            
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#inicio" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Inicio</a>
-                <a href="#funciones" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Funciones</a>
-                <a href="#ventajas" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">¿Por qué Keleo?</a>
-                <a href="#precios" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Planes</a>
-            </div>
-
-            <div class="flex items-center gap-4">
-                <!-- Dark Mode Toggle Button -->
-                <button id="theme-toggle" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition focus:outline-none">
-                    <i id="theme-icon" class="fas fa-moon"></i>
-                </button>
-
-                <div class="hidden md:block">
-                    <a href="#contacto" class="px-6 py-2.5 bg-keleo-600 text-white font-semibold rounded-full hover:bg-keleo-700 transition shadow-lg hover:shadow-keleo-500/30 transform hover:-translate-y-0.5">
-                        Solicitar Demo
-                    </a>
-                </div>
+    <header>
+        <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 dark:bg-dark-bg/90 backdrop-blur-md shadow-sm dark:shadow-slate-800/50" aria-label="Navegación principal">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="flex items-center gap-2 group" aria-label="Ir al inicio de Keleo App">
+                    <img src="assets/keleo.png" alt="Logotipo de Keleo App" width="32" height="32">
+                    <span class="text-2xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600">App</span></span>
+                </a>
                 
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-2xl text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Inicio</a>
+                    <a href="#soluciones" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Soluciones</a>
+                    <a href="#funciones" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Funciones</a>
+                    <a href="#precios" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium transition">Planes</a>
+                </div>
 
-    <!-- HERO SECTION -->
-    <section id="inicio" class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900 relative overflow-hidden">
-        <!-- Background Decor -->
-        <div class="absolute top-0 right-0 w-1/3 h-full bg-keleo-100/30 dark:bg-keleo-900/10 skew-x-12 transform translate-x-20"></div>
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" aria-label="Alternar modo oscuro" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition focus:outline-none">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
 
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-block px-4 py-1.5 bg-keleo-100 dark:bg-keleo-900/30 text-keleo-700 dark:text-keleo-300 rounded-full text-sm font-semibold mb-6 animate-pulse-slow">
-                        🚀 La evolución del sector gastronómico
-                    </div>
-                    <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight text-gray-900 dark:text-white mb-6">
-                        Gestiona tu restaurante <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-keleo-600 to-blue-600 dark:from-keleo-400 dark:to-blue-400">sin papel y en tiempo real</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                        Desde la toma de pedidos hasta el análisis financiero. Keleo App centraliza tus operaciones, reduce errores en cocina y aumenta tus ganancias.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#precios" class="px-8 py-4 bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-xl hover:shadow-keleo-500/40 text-center">
-                            Ver Planes
-                        </a>
-                        <a href="#contacto" class="px-8 py-4 bg-white dark:bg-transparent text-keleo-700 dark:text-white border-2 border-keleo-100 dark:border-gray-600 font-bold rounded-xl hover:border-keleo-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition text-center flex items-center justify-center gap-2">
-                            <i class="fas fa-play-circle"></i> Ver Video
+                    <div class="hidden md:block">
+                        <a href="#contacto" class="px-6 py-2.5 bg-keleo-600 text-white font-semibold rounded-full hover:bg-keleo-700 transition shadow-lg hover:shadow-keleo-500/30 transform hover:-translate-y-0.5">
+                            Solicitar Demo
                         </a>
                     </div>
-                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500 dark:text-gray-400">
-                        <div class="flex -space-x-2">
-                            <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600 border-2 border-white dark:border-gray-800"></div>
-                            <div class="w-8 h-8 rounded-full bg-gray-400 dark:bg-gray-500 border-2 border-white dark:border-gray-800"></div>
-                            <div class="w-8 h-8 rounded-full bg-gray-500 dark:bg-gray-400 border-2 border-white dark:border-gray-800"></div>
-                        </div>
-                        <p>Más de <span class="font-bold text-gray-800 dark:text-white">500+ restaurantes</span> confían en nosotros.</p>
-                    </div>
+                    
+                    <button class="md:hidden text-2xl text-gray-600 dark:text-gray-300" aria-label="Menú móvil">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
+            </div>
+        </nav>
+    </header>
 
-                <!-- Hero Image / Mockup -->
-                <div class="lg:w-1/2 relative">
-                    <div class="relative w-full max-w-lg mx-auto transform hover:scale-[1.02] transition duration-500">
-                        <!-- Simulated Tablet Screen -->
-                        <div class="bg-gray-900 rounded-[2rem] p-3 shadow-2xl border-4 border-gray-800 dark:border-gray-700">
-                            <div class="bg-gray-100 dark:bg-gray-800 rounded-[1.5rem] overflow-hidden h-[400px] lg:h-[500px] relative transition-colors">
-                                <!-- App Header -->
-                                <div class="bg-white dark:bg-gray-900 p-4 flex justify-between items-center border-b dark:border-gray-700 shadow-sm transition-colors">
-                                    <div class="font-bold text-gray-800 dark:text-white">Mesas Activas</div>
-                                    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                        En línea
-                                    </div>
-                                </div>
-                                <!-- App Content Grid -->
-                                <div class="p-4 grid grid-cols-2 gap-3 overflow-y-auto h-full pb-20">
-                                    <!-- Table Card 1 -->
-                                    <div class="bg-white dark:bg-gray-700 p-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 transition-colors">
-                                        <div class="flex justify-between mb-2">
-                                            <span class="font-bold text-gray-700 dark:text-white">Mesa 4</span>
-                                            <span class="text-xs bg-orange-100 text-orange-600 dark:bg-orange-900/50 dark:text-orange-300 px-2 py-0.5 rounded-full">Ocupada</span>
+    <main>
+        <!-- HERO SECTION -->
+        <section id="inicio" class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/3 h-full bg-keleo-100/30 dark:bg-keleo-900/10 skew-x-12 transform translate-x-20"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2 text-center lg:text-left">
+                        <div class="inline-block px-4 py-1.5 bg-keleo-100 dark:bg-keleo-900/30 text-keleo-700 dark:text-keleo-300 rounded-full text-sm font-semibold mb-6 animate-pulse-slow">
+                            🚀 Digitalización del sector gastronómico
+                        </div>
+                        <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight text-gray-900 dark:text-white mb-6">
+                            Gestión integral para <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-keleo-600 to-blue-600 dark:from-keleo-400 dark:to-blue-400">Restaurantes y Bares</span>
+                        </h1>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                            Keleo App transforma la manera en que gestionas pedidos, operaciones y finanzas. Centraliza la información en tiempo real y evita procesos manuales.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#precios" class="px-8 py-4 bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-xl hover:shadow-keleo-500/40 text-center">
+                                Ver Planes
+                            </a>
+                            <a href="#contacto" class="px-8 py-4 bg-white dark:bg-transparent text-keleo-700 dark:text-white border-2 border-keleo-100 dark:border-gray-600 font-bold rounded-xl hover:border-keleo-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition text-center flex items-center justify-center gap-2">
+                                <i class="fas fa-play-circle"></i> Demo en Video
+                            </a>
+                        </div>
+                        <div class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500 dark:text-gray-400">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600 border-2 border-white dark:border-gray-800"></div>
+                                <div class="w-8 h-8 rounded-full bg-gray-400 dark:bg-gray-500 border-2 border-white dark:border-gray-800"></div>
+                                <div class="w-8 h-8 rounded-full bg-gray-500 dark:bg-gray-400 border-2 border-white dark:border-gray-800"></div>
+                            </div>
+                            <p>Más de <span class="font-bold text-gray-800 dark:text-white">500+ restaurantes</span> confían en nosotros.</p>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image / Mockup -->
+                    <div class="lg:w-1/2 relative">
+                        <div class="relative w-full max-w-lg mx-auto transform hover:scale-[1.02] transition duration-500">
+                            <!-- Simulated Tablet Screen -->
+                            <div class="bg-gray-900 rounded-[2rem] p-3 shadow-2xl border-4 border-gray-800 dark:border-gray-700">
+                                <div class="bg-gray-100 dark:bg-gray-800 rounded-[1.5rem] overflow-hidden h-[400px] lg:h-[500px] relative transition-colors">
+                                    <div class="bg-white dark:bg-gray-900 p-4 flex justify-between items-center border-b dark:border-gray-700 shadow-sm transition-colors">
+                                        <div class="font-bold text-gray-800 dark:text-white">Panel de Mesas</div>
+                                        <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                            Online
                                         </div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-300 mb-2">Mesero: Juan P.</div>
-                                        <div class="space-y-1 text-gray-600 dark:text-gray-200">
-                                            <div class="flex justify-between text-xs font-medium">
-                                                <span>2x Tacos Pastor</span>
-                                                <span>$40</span>
+                                    </div>
+                                    <div class="p-4 grid grid-cols-2 gap-3 overflow-y-auto h-full pb-20">
+                                        <!-- Card Mesa Ocupada -->
+                                        <div class="bg-white dark:bg-gray-700 p-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 transition-colors">
+                                            <div class="flex justify-between mb-2">
+                                                <span class="font-bold text-gray-700 dark:text-white">Mesa 4</span>
+                                                <span class="text-xs bg-orange-100 text-orange-600 dark:bg-orange-900/50 dark:text-orange-300 px-2 py-0.5 rounded-full">Ocupada</span>
                                             </div>
-                                            <div class="flex justify-between text-xs font-medium">
-                                                <span>1x Coca Cola</span>
-                                                <span>$25</span>
+                                            <div class="text-xs text-gray-500 dark:text-gray-300 mb-2">Mesero: Juan P.</div>
+                                            <div class="space-y-1 text-gray-600 dark:text-gray-200">
+                                                <div class="flex justify-between text-xs font-medium">
+                                                    <span>2x Tacos Pastor</span>
+                                                    <span>$40</span>
+                                                </div>
+                                                <div class="flex justify-between text-xs font-medium">
+                                                    <span>1x Coca Cola</span>
+                                                    <span>$25</span>
+                                                </div>
                                             </div>
+                                            <button class="w-full mt-3 bg-keleo-600 text-white text-xs py-1.5 rounded-lg">Agregar Pedido</button>
                                         </div>
-                                        <button class="w-full mt-3 bg-keleo-600 text-white text-xs py-1.5 rounded-lg">Agregar Pedido</button>
-                                    </div>
-                                    <!-- Table Card 2 -->
-                                    <div class="bg-white dark:bg-gray-700 p-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 border-l-4 border-l-green-500 transition-colors">
-                                        <div class="flex justify-between mb-2">
-                                            <span class="font-bold text-gray-700 dark:text-white">Mesa 2</span>
-                                            <span class="text-xs bg-green-100 text-green-600 dark:bg-green-900/50 dark:text-green-300 px-2 py-0.5 rounded-full">Libre</span>
+                                        <!-- Card Mesa Libre -->
+                                        <div class="bg-white dark:bg-gray-700 p-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 border-l-4 border-l-green-500 transition-colors">
+                                            <div class="flex justify-between mb-2">
+                                                <span class="font-bold text-gray-700 dark:text-white">Mesa 2</span>
+                                                <span class="text-xs bg-green-100 text-green-600 dark:bg-green-900/50 dark:text-green-300 px-2 py-0.5 rounded-full">Libre</span>
+                                            </div>
+                                            <div class="h-16 flex items-center justify-center text-gray-300 dark:text-gray-500">
+                                                <i class="fas fa-chair text-2xl" aria-hidden="true"></i>
+                                            </div>
+                                            <button class="w-full mt-3 border border-gray-300 dark:border-gray-500 text-gray-600 dark:text-gray-300 text-xs py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">Asignar</button>
                                         </div>
-                                        <div class="h-16 flex items-center justify-center text-gray-300 dark:text-gray-500">
-                                            <i class="fas fa-chair text-2xl"></i>
+                                         <!-- Card Mesa Pagando -->
+                                         <div class="bg-white dark:bg-gray-700 p-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 transition-colors">
+                                            <div class="flex justify-between mb-2">
+                                                <span class="font-bold text-gray-700 dark:text-white">Mesa 8</span>
+                                                <span class="text-xs bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-300 px-2 py-0.5 rounded-full">Pagando</span>
+                                            </div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-300 mb-2">Total: $450.00</div>
+                                            <button class="w-full mt-3 bg-green-600 text-white text-xs py-1.5 rounded-lg">Cerrar Cuenta</button>
                                         </div>
-                                        <button class="w-full mt-3 border border-gray-300 dark:border-gray-500 text-gray-600 dark:text-gray-300 text-xs py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">Asignar</button>
-                                    </div>
-                                     <!-- Table Card 3 -->
-                                     <div class="bg-white dark:bg-gray-700 p-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 transition-colors">
-                                        <div class="flex justify-between mb-2">
-                                            <span class="font-bold text-gray-700 dark:text-white">Mesa 8</span>
-                                            <span class="text-xs bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-300 px-2 py-0.5 rounded-full">Pagando</span>
-                                        </div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-300 mb-2">Total: $450.00</div>
-                                        <button class="w-full mt-3 bg-green-600 text-white text-xs py-1.5 rounded-lg">Cerrar Cuenta</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Floating Stats Card (Real Data) -->
-                        <div class="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 w-48 animate-bounce" style="animation-duration: 3s;">
-                            <div class="flex items-center gap-3 mb-2">
-                                <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
-                                    <i class="fas fa-arrow-up text-xs"></i>
+                            
+                            <!-- Floating Stats Card -->
+                            <div class="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 w-48 animate-bounce" style="animation-duration: 3s;">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+                                        <i class="fas fa-arrow-up text-xs"></i>
+                                    </div>
+                                    <div class="text-xs font-bold text-gray-500 dark:text-gray-400">Ventas Hoy</div>
                                 </div>
-                                <div class="text-xs font-bold text-gray-500 dark:text-gray-400">Ventas Hoy</div>
+                                <div class="text-2xl font-bold text-gray-900 dark:text-white">$12,450</div>
+                                <div class="text-xs text-green-500 font-medium">+15% vs ayer</div>
                             </div>
-                            <div class="text-2xl font-bold text-gray-900 dark:text-white">$12,450</div>
-                            <div class="text-xs text-green-500 font-medium">+15% vs ayer</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- UI SHOWCASE & FEATURES -->
-    <section id="funciones" class="py-20 bg-white dark:bg-dark-bg transition-colors">
-        <div class="container mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-keleo-600 dark:text-keleo-400 font-semibold text-sm tracking-wider uppercase">Funcionalidades Principales</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">Control total desde la cocina hasta la caja</h2>
-                <p class="mt-4 text-gray-600 dark:text-gray-300">Keleo integra todas las áreas de tu restaurante para eliminar cuellos de botella y maximizar la rotación de mesas.</p>
-            </div>
+        <!-- UI SHOWCASE & FEATURES -->
+        <section id="funciones" class="py-20 bg-white dark:bg-dark-bg transition-colors">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-keleo-600 dark:text-keleo-400 font-semibold text-sm tracking-wider uppercase">Funcionalidades Principales</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">Control total desde la cocina hasta la caja</h2>
+                    <p class="mt-4 text-gray-600 dark:text-gray-300">Keleo integra todas las áreas de tu restaurante para eliminar cuellos de botella y maximizar la rotación de mesas.</p>
+                </div>
 
-            <!-- Feature 1: Real Time Stats -->
-            <div class="flex flex-col md:flex-row items-center gap-12 mb-20">
-                <div class="md:w-1/2 relative">
-                    <!-- Dashboard Visual Mockup -->
-                    <div class="bg-slate-800 rounded-xl p-6 shadow-2xl text-white">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-bold">Panel de Control</h3>
-                            <span class="text-xs bg-green-500 px-2 py-1 rounded">En Vivo</span>
-                        </div>
-                        <!-- Graph mockup -->
-                        <div class="flex items-end gap-2 h-32 mb-4 px-2">
-                            <div class="w-1/6 bg-indigo-500 h-[40%] rounded-t"></div>
-                            <div class="w-1/6 bg-indigo-500 h-[60%] rounded-t"></div>
-                            <div class="w-1/6 bg-indigo-500 h-[30%] rounded-t"></div>
-                            <div class="w-1/6 bg-keleo-500 h-[80%] rounded-t relative group">
-                                <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 text-xs px-2 py-1 rounded shadow hidden group-hover:block">$4.5k</div>
+                <!-- Feature 1: Real Time Stats -->
+                <div class="flex flex-col md:flex-row items-center gap-12 mb-20">
+                    <div class="md:w-1/2 relative">
+                        <div class="bg-slate-800 rounded-xl p-6 shadow-2xl text-white">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold">Panel de Control</h3>
+                                <span class="text-xs bg-green-500 px-2 py-1 rounded">En Vivo</span>
                             </div>
-                            <div class="w-1/6 bg-indigo-500 h-[55%] rounded-t"></div>
-                            <div class="w-1/6 bg-indigo-500 h-[70%] rounded-t"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 mt-4">
-                            <div class="bg-slate-700 p-3 rounded-lg">
-                                <p class="text-xs text-gray-400">Plato más vendido</p>
-                                <p class="font-bold text-sm">Hamburguesa Especial</p>
+                            <!-- Graph mockup -->
+                            <div class="flex items-end gap-2 h-32 mb-4 px-2">
+                                <div class="w-1/6 bg-indigo-500 h-[40%] rounded-t"></div>
+                                <div class="w-1/6 bg-indigo-500 h-[60%] rounded-t"></div>
+                                <div class="w-1/6 bg-indigo-500 h-[30%] rounded-t"></div>
+                                <div class="w-1/6 bg-keleo-500 h-[80%] rounded-t relative group">
+                                    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 text-xs px-2 py-1 rounded shadow hidden group-hover:block">$4.5k</div>
+                                </div>
+                                <div class="w-1/6 bg-indigo-500 h-[55%] rounded-t"></div>
+                                <div class="w-1/6 bg-indigo-500 h-[70%] rounded-t"></div>
                             </div>
-                            <div class="bg-slate-700 p-3 rounded-lg">
-                                <p class="text-xs text-gray-400">Ticket Promedio</p>
-                                <p class="font-bold text-sm text-green-400">$350.00</p>
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div class="bg-slate-700 p-3 rounded-lg">
+                                    <p class="text-xs text-gray-400">Plato más vendido</p>
+                                    <p class="font-bold text-sm">Hamburguesa Especial</p>
+                                </div>
+                                <div class="bg-slate-700 p-3 rounded-lg">
+                                    <p class="text-xs text-gray-400">Ticket Promedio</p>
+                                    <p class="font-bold text-sm text-green-400">$350.00</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 bg-keleo-100 dark:bg-keleo-900/30 rounded-lg text-keleo-600 dark:text-keleo-400">
+                                <i class="fas fa-chart-pie text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Datos en Tiempo Real</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                            Obtén reportes claros sobre ingresos, productos estrella, horarios pico y desempeño de empleados. Keleo te da la visibilidad que necesitas para tomar decisiones estratégicas.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500"></i> Inventario actualizado automáticamente.
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500"></i> Métricas de pérdidas y ganancias.
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500"></i> Control multi-restaurante centralizado.
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="md:w-1/2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="p-3 bg-keleo-100 dark:bg-keleo-900/30 rounded-lg text-keleo-600 dark:text-keleo-400">
-                            <i class="fas fa-chart-pie text-xl"></i>
+
+                <!-- Feature 2: Waiter Efficiency -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                    <div class="md:w-1/2">
+                        <div class="bg-white dark:bg-dark-card rounded-xl shadow-xl p-2 border border-gray-100 dark:border-gray-700 transform rotate-1 hover:rotate-0 transition duration-300">
+                            <div class="bg-orange-50 dark:bg-gray-800 rounded-lg p-6 text-center border-2 border-dashed border-orange-200 dark:border-gray-600">
+                                <i class="fas fa-mobile-alt text-4xl text-orange-400 mb-4"></i>
+                                <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Comanda Móvil</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">El mesero toma la orden en la mesa y llega directo a cocina.</p>
+                                <div class="flex justify-center gap-2">
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-700 rounded-full text-xs font-bold shadow text-gray-700 dark:text-gray-200">Sin papel</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-700 rounded-full text-xs font-bold shadow text-gray-700 dark:text-gray-200">Sin gritos</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Datos en Tiempo Real</h3>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        Los propietarios suelen carecer de visibilidad inmediata. Con Keleo, obtienes reportes claros sobre ingresos, productos estrella, horarios pico y desempeño de empleados al instante.
+                    <div class="md:w-1/2">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-orange-600 dark:text-orange-400">
+                                <i class="fas fa-bolt text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Agilidad en el Servicio</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                            Elimina errores de notas en papel ilegibles. La comunicación fluida entre meseros, cocina y barra reduce drásticamente los tiempos de espera y aumenta la satisfacción del cliente.
+                        </p>
+                        <a href="#contacto" class="text-keleo-600 dark:text-keleo-400 font-semibold hover:underline">Ver cómo funciona en video <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section id="soluciones" class="py-20 bg-gray-900 dark:bg-gray-950 text-white relative">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">¿Por qué elegir Keleo App?</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        Pensado para negocios reales, desde pequeños locales familiares hasta cadenas en expansión.
                     </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                            <i class="fas fa-check text-green-500"></i> Inventario actualizado automáticamente.
-                        </li>
-                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                            <i class="fas fa-check text-green-500"></i> Métricas de pérdidas y ganancias.
-                        </li>
-                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                            <i class="fas fa-check text-green-500"></i> Control multi-restaurante centralizado.
-                        </li>
-                    </ul>
                 </div>
-            </div>
 
-            <!-- Feature 2: Waiter Efficiency -->
-            <div class="flex flex-col md:flex-row-reverse items-center gap-12">
-                <div class="md:w-1/2">
-                    <div class="bg-white dark:bg-dark-card rounded-xl shadow-xl p-2 border border-gray-100 dark:border-gray-700 transform rotate-1 hover:rotate-0 transition duration-300">
-                        <div class="bg-orange-50 dark:bg-gray-800 rounded-lg p-6 text-center border-2 border-dashed border-orange-200 dark:border-gray-600">
-                            <i class="fas fa-mobile-alt text-4xl text-orange-400 mb-4"></i>
-                            <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Comanda Móvil</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">El mesero toma la orden en la mesa y llega directo a cocina.</p>
-                            <div class="flex justify-center gap-2">
-                                <span class="px-3 py-1 bg-white dark:bg-gray-700 rounded-full text-xs font-bold shadow text-gray-700 dark:text-gray-200">Sin papel</span>
-                                <span class="px-3 py-1 bg-white dark:bg-gray-700 rounded-full text-xs font-bold shadow text-gray-700 dark:text-gray-200">Sin gritos</span>
-                            </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Benefit 1 -->
+                    <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
+                        <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
+                            <i class="fas fa-rocket text-xl text-keleo-400 group-hover:text-white"></i>
                         </div>
+                        <h3 class="text-xl font-bold mb-2">Escalable</h3>
+                        <p class="text-gray-400 text-sm">Crece contigo. Desde un local hasta múltiples sucursales sin cambiar de sistema.</p>
                     </div>
-                </div>
-                <div class="md:w-1/2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-orange-600 dark:text-orange-400">
-                            <i class="fas fa-bolt text-xl"></i>
+                    <!-- Benefit 2 -->
+                    <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
+                        <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
+                            <i class="fas fa-magic text-xl text-keleo-400 group-hover:text-white"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Agilidad en el Servicio</h3>
+                        <h3 class="text-xl font-bold mb-2">Interfaz Intuitiva</h3>
+                        <p class="text-gray-400 text-sm">Curva de aprendizaje mínima. Cualquier empleado puede usarla en minutos.</p>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        Elimina errores de notas en papel ilegibles. La comunicación fluida entre meseros, cocina y barra reduce drásticamente los tiempos de espera y aumenta la satisfacción del cliente.
-                    </p>
-                    <a href="#contacto" class="text-keleo-600 dark:text-keleo-400 font-semibold hover:underline">Ver cómo funciona en video <i class="fas fa-arrow-right ml-1"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE US -->
-    <section id="ventajas" class="py-20 bg-gray-900 dark:bg-gray-950 text-white relative">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">¿Por qué elegir Keleo App?</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    A diferencia de softwares costosos diseñados para grandes corporativos, Keleo está pensado para negocios reales como el tuyo.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Benefit 1 -->
-                <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
-                    <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
-                        <i class="fas fa-rocket text-xl text-keleo-400 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Escalable</h3>
-                    <p class="text-gray-400 text-sm">Crece contigo. Desde un pequeño local familiar hasta múltiples sucursales sin cambiar de sistema.</p>
-                </div>
-                <!-- Benefit 2 -->
-                <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
-                    <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
-                        <i class="fas fa-magic text-xl text-keleo-400 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Interfaz Intuitiva</h3>
-                    <p class="text-gray-400 text-sm">Curva de aprendizaje mínima. Cualquier empleado puede aprender a usarla en minutos.</p>
-                </div>
-                <!-- Benefit 3 -->
-                <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
-                    <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
-                        <i class="fas fa-lightbulb text-xl text-keleo-400 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Estadísticas Útiles</h3>
-                    <p class="text-gray-400 text-sm">Convertimos datos en acciones. Conoce qué vender y cuándo para maximizar ganancias.</p>
-                </div>
-                <!-- Benefit 4 -->
-                <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
-                    <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
-                        <i class="fas fa-wallet text-xl text-keleo-400 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Costo Accesible</h3>
-                    <p class="text-gray-400 text-sm">Funcionalidades de alto nivel a un precio justo para pequeños y medianos negocios.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="py-20 bg-purple-50 dark:bg-gray-900 transition-colors">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Lo que dicen nuestros clientes</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white dark:bg-dark-card p-8 rounded-2xl shadow-sm hover:shadow-md transition">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 italic">"Antes tenía problemas con las cuentas y el inventario. Con Keleo, sé exactamente cuánto gano cada día en tiempo real. Increíble herramienta."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
-                             <!-- Avatar placeholder -->
-                             <i class="fas fa-user w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400"></i>
+                    <!-- Benefit 3 -->
+                    <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
+                        <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
+                            <i class="fas fa-lightbulb text-xl text-keleo-400 group-hover:text-white"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-sm text-gray-900 dark:text-white">Carlos M.</h4>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Dueño de Cafetería Central</p>
-                        </div>
+                        <h3 class="text-xl font-bold mb-2">Estadísticas Útiles</h3>
+                        <p class="text-gray-400 text-sm">Convierte datos en ganancias. Conoce qué vender y cuándo para maximizar beneficios.</p>
                     </div>
-                </div>
-                <!-- Testimonial 2 -->
-                <div class="bg-white dark:bg-dark-card p-8 rounded-2xl shadow-sm hover:shadow-md transition">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 italic">"Mis meseros están felices porque ya no hay errores con la cocina. El servicio es mucho más rápido y los clientes lo notan."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
-                             <i class="fas fa-user w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400"></i>
+                    <!-- Benefit 4 -->
+                    <div class="bg-gray-800 dark:bg-gray-900 p-6 rounded-2xl border border-gray-700 hover:border-keleo-500 transition duration-300 group">
+                        <div class="w-12 h-12 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-keleo-600 transition">
+                            <i class="fas fa-wallet text-xl text-keleo-400 group-hover:text-white"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-sm text-gray-900 dark:text-white">Mariana R.</h4>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Gerente en Pizzería Luigi</p>
-                        </div>
-                    </div>
-                </div>
-                 <!-- Testimonial 3 -->
-                 <div class="bg-white dark:bg-dark-card p-8 rounded-2xl shadow-sm hover:shadow-md transition">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 italic">"Lo mejor es poder gestionar mis dos sucursales desde la misma app sin tener que estar físicamente en ambas. Control total."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
-                             <i class="fas fa-user w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-sm text-gray-900 dark:text-white">Roberto S.</h4>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Propietario BurgerHouse</p>
-                        </div>
+                        <h3 class="text-xl font-bold mb-2">Costo Accesible</h3>
+                        <p class="text-gray-400 text-sm">Funcionalidades de alto nivel a un precio justo para PYMES.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- PRICING -->
-    <section id="precios" class="py-20 bg-white dark:bg-dark-bg transition-colors">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Planes diseñados para tu crecimiento</h2>
-                <p class="text-gray-600 dark:text-gray-300">Elige el plan que se adapte al tamaño actual de tu negocio.</p>
-            </div>
+        <!-- PRICING -->
+        <section id="precios" class="py-20 bg-white dark:bg-dark-bg transition-colors">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Planes diseñados para tu crecimiento</h2>
+                    <p class="text-gray-600 dark:text-gray-300">Elige el plan que se adapte al tamaño actual de tu negocio.</p>
+                </div>
 
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-                
-                <!-- Plan Básico -->
-                <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:shadow-xl transition relative bg-white dark:bg-dark-card">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Básico</h3>
-                    <p class="text-sm text-keleo-600 dark:text-keleo-400 font-semibold mb-4 tracking-wide uppercase">Plan Emprendedor</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Ideal para pequeños restaurantes o cafeterías de un solo local.</p>
-                    <div class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">$199<span class="text-lg font-normal text-gray-500 dark:text-gray-400">/mes</span></div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
                     
-                    <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Gestión de mesas y pedidos</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Comunicación con cocina</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Reportes básicos</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> 1 Usuario Administrador</li>
-                    </ul>
-                    <a href="#contacto" class="block w-full py-3 text-center border-2 border-keleo-600 text-keleo-600 dark:text-keleo-400 dark:border-keleo-400 font-bold rounded-xl hover:bg-keleo-50 dark:hover:bg-gray-700 transition">Elegir Básico</a>
-                </div>
-
-                <!-- Plan Profesional (Destacado) -->
-                <div class="border-2 border-keleo-500 rounded-2xl p-8 shadow-2xl relative bg-white dark:bg-dark-card transform md:-translate-y-4">
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-keleo-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Más Popular</div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Profesional</h3>
-                    <p class="text-sm text-keleo-600 dark:text-keleo-400 font-semibold mb-4 tracking-wide uppercase">Plan Crecimiento</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Para negocios medianos o con más de una sucursal.</p>
-                    <div class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">$399<span class="text-lg font-normal text-gray-500 dark:text-gray-400">/mes</span></div>
-                    
-                    <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Todo lo del plan Básico</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Estadísticas avanzadas</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Integración de pagos</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Exportación de reportes</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Multi-usuario</li>
-                    </ul>
-                    <a href="#contacto" class="block w-full py-3 text-center bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-lg">Elegir Profesional</a>
-                </div>
-
-                <!-- Plan Empresarial -->
-                <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:shadow-xl transition relative bg-white dark:bg-dark-card">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Empresarial</h3>
-                    <p class="text-sm text-keleo-600 dark:text-keleo-400 font-semibold mb-4 tracking-wide uppercase">Plan Expansión</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Cadenas de restaurantes con múltiples sedes.</p>
-                    <div class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">Custom</div>
-                    
-                    <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Todo lo del plan Profesional</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Panel Multi-Restaurante</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Métricas Tiempo Real (Global)</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Soporte Prioritario y API</li>
-                    </ul>
-                    <a href="#contacto" class="block w-full py-3 text-center border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-bold rounded-xl hover:border-gray-400 hover:text-gray-800 dark:hover:text-white transition">Contactar Ventas</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contacto" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white dark:bg-dark-card rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
-                <!-- Info Side -->
-                <div class="md:w-5/12 bg-keleo-900 dark:bg-keleo-950 p-10 text-white flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4">Ponte en Contacto</h3>
-                        <p class="text-keleo-100 mb-8">¿Listo para transformar tu restaurante? Escríbenos para agendar una demo o resolver tus dudas.</p>
+                    <!-- Plan Básico -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:shadow-xl transition relative bg-white dark:bg-dark-card">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Básico</h3>
+                        <p class="text-sm text-keleo-600 dark:text-keleo-400 font-semibold mb-4 tracking-wide uppercase">Plan Emprendedor</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Ideal para pequeños restaurantes o cafeterías de un solo local.</p>
+                        <div class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">$199<span class="text-lg font-normal text-gray-500 dark:text-gray-400">/mes</span></div>
                         
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <span>+52 (55) 29937998</span>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <span>info@keleo.com</span>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <span>Ciudad de México, MX</span>
-                            </div>
-                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Gestión de mesas y pedidos</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Comunicación con cocina</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Reportes básicos</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> 1 Usuario Administrador</li>
+                        </ul>
+                        <a href="#contacto" class="block w-full py-3 text-center border-2 border-keleo-600 text-keleo-600 dark:text-keleo-400 dark:border-keleo-400 font-bold rounded-xl hover:bg-keleo-50 dark:hover:bg-gray-700 transition" aria-label="Elegir Plan Básico">Elegir Básico</a>
                     </div>
-                    <div class="mt-12 flex gap-4">
-                        <a href="#" class="text-white hover:text-keleo-200 transition"><i class="fab fa-facebook text-xl"></i></a>
-                        <a href="#" class="text-white hover:text-keleo-200 transition"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-white hover:text-keleo-200 transition"><i class="fab fa-linkedin text-xl"></i></a>
-                    </div>
-                </div>
 
-                <!-- Form Side -->
-                <div class="md:w-7/12 p-10">
-                    <form>
-                        <div class="grid md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Nombre</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition" placeholder="Tu nombre">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Restaurante</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition" placeholder="Nombre del negocio">
-                            </div>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Correo Electrónico</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition" placeholder="tu@email.com">
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Mensaje</label>
-                            <textarea class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition h-32" placeholder="Cuéntanos sobre tu negocio..."></textarea>
-                        </div>
-                        <button type="button" class="w-full py-4 bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-lg">Enviar Mensaje</button>
-                    </form>
+                    <!-- Plan Profesional (Destacado) -->
+                    <div class="border-2 border-keleo-500 rounded-2xl p-8 shadow-2xl relative bg-white dark:bg-dark-card transform md:-translate-y-4">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-keleo-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Más Popular</div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Profesional</h3>
+                        <p class="text-sm text-keleo-600 dark:text-keleo-400 font-semibold mb-4 tracking-wide uppercase">Plan Crecimiento</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Para negocios medianos o con más de una sucursal.</p>
+                        <div class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">$399<span class="text-lg font-normal text-gray-500 dark:text-gray-400">/mes</span></div>
+                        
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Todo lo del plan Básico</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Estadísticas avanzadas</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Integración de pagos</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Exportación de reportes</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-keleo-600 dark:text-keleo-400 mt-1"></i> Multi-usuario</li>
+                        </ul>
+                        <a href="#contacto" class="block w-full py-3 text-center bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-lg" aria-label="Elegir Plan Profesional">Elegir Profesional</a>
+                    </div>
+
+                    <!-- Plan Empresarial -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:shadow-xl transition relative bg-white dark:bg-dark-card">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Empresarial</h3>
+                        <p class="text-sm text-keleo-600 dark:text-keleo-400 font-semibold mb-4 tracking-wide uppercase">Plan Expansión</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Cadenas de restaurantes con múltiples sedes.</p>
+                        <div class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">Custom</div>
+                        
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Todo lo del plan Profesional</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Panel Multi-Restaurante</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Métricas Tiempo Real (Global)</li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Soporte Prioritario y API</li>
+                        </ul>
+                        <a href="#contacto" class="block w-full py-3 text-center border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-bold rounded-xl hover:border-gray-400 hover:text-gray-800 dark:hover:text-white transition" aria-label="Contactar Ventas para Plan Empresarial">Contactar Ventas</a>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contacto" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto bg-white dark:bg-dark-card rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+                    <!-- Info Side -->
+                    <div class="md:w-5/12 bg-keleo-900 dark:bg-keleo-950 p-10 text-white flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Ponte en Contacto</h3>
+                            <p class="text-keleo-100 mb-8">¿Listo para transformar tu restaurante? Escríbenos para agendar una demo o resolver tus dudas.</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <span>+52 (55) 29937998</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <span>info@keleo.com</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <span>Ciudad de México, MX</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-12 flex gap-4">
+                            <a href="#" class="text-white hover:text-keleo-200 transition" aria-label="Facebook"><i class="fab fa-facebook text-xl"></i></a>
+                            <a href="#" class="text-white hover:text-keleo-200 transition" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+                            <a href="#" class="text-white hover:text-keleo-200 transition" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Form Side -->
+                    <div class="md:w-7/12 p-10">
+                        <form>
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="nombre" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Nombre</label>
+                                    <input type="text" id="nombre" name="nombre" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition" placeholder="Tu nombre" required>
+                                </div>
+                                <div>
+                                    <label for="restaurante" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Restaurante</label>
+                                    <input type="text" id="restaurante" name="restaurante" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition" placeholder="Nombre del negocio">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="mensaje" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition h-32" placeholder="Cuéntanos sobre tu negocio..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-lg">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- FOOTER -->
     <footer class="bg-gray-900 dark:bg-black text-gray-400 py-12 border-t border-gray-800">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-keleo-600 rounded flex items-center justify-center text-white text-sm">
-                    <i class="fas fa-utensils"></i>
-                </div>
+                <img src="assets/keleo.png" alt="Logo Keleo App" width="32" height="32">
                 <span class="text-xl font-bold text-white">Keleo<span class="text-keleo-500">App</span></span>
             </div>
             <div class="text-sm">
