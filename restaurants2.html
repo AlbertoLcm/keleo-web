@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Restaurantes | Keleo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        keleo: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            text: '#f8fafc'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, div, nav, input, button, a, span, h1, h2, h3, p {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .glass-panel {
+            background: rgba(30, 41, 59, 0.7); /* Dark card color with opacity */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 min-h-screen relative overflow-x-hidden">
+
+    <!-- BACKGROUND ATMOSPHERE (Identidad Login) -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-keleo-200/40 dark:bg-keleo-900/20 rounded-full blur-[120px]"></div>
+        <div class="absolute top-[10%] -right-[10%] w-[40%] h-[40%] bg-blue-200/30 dark:bg-blue-900/10 rounded-full blur-[100px]"></div>
+        <div class="absolute -bottom-[20%] left-[20%] w-[60%] h-[60%] bg-purple-100/40 dark:bg-purple-900/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <!-- NAV BAR -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-gray-200/50 dark:border-dark-border/50">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-keleo-600 rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-keleo-500/30 transition transform group-hover:scale-105">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600">App</span></span>
+            </a>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="w-10 h-10 rounded-full bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-700 text-gray-500 dark:text-yellow-400 transition flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                
+                <div class="flex items-center gap-3 pl-4 border-l border-gray-200 dark:border-gray-700">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">Luis Cruz</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Propietario</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-keleo-500 to-blue-500 p-[2px] cursor-pointer">
+                        <div class="w-full h-full rounded-full bg-white dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+                             <span class="font-bold text-keleo-600 dark:text-keleo-400">LC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 container mx-auto px-6 py-10">
+        
+        <!-- WELCOME HEADER -->
+        <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                    Hola, Luis <span class="inline-block animate-wave origin-[70%_70%]">👋</span>
+                </h1>
+                <p class="text-gray-500 dark:text-gray-400 text-lg">Aquí tienes el resumen de tu imperio gastronómico hoy.</p>
+            </div>
+            <button class="flex items-center gap-2 px-6 py-3 bg-keleo-600 text-white font-bold rounded-xl shadow-lg shadow-keleo-500/30 hover:bg-keleo-700 transition transform hover:-translate-y-0.5 active:scale-95">
+                <i class="fas fa-plus"></i>
+                <span>Nuevo Restaurante</span>
+            </button>
+        </div>
+
+        <!-- GLOBAL STATS (Glassmorphism Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Stat 1 -->
+            <div class="glass-panel p-6 rounded-2xl shadow-sm hover:shadow-md transition group">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-keleo-50 dark:bg-keleo-900/20 text-keleo-600 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <span class="text-xs font-bold text-green-500 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded-lg flex items-center gap-1">
+                        <i class="fas fa-arrow-up"></i> 12%
+                    </span>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Ventas Totales (Hoy)</p>
+                <h3 class="text-3xl font-bold text-gray-900 dark:text-white">$24,350</h3>
+            </div>
+    
+            <!-- Stat 2 -->
+            <div class="glass-panel p-6 rounded-2xl shadow-sm hover:shadow-md transition group">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-orange-500 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-lg">
+                        En vivo
+                    </span>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Pedidos Activos</p>
+                <h3 class="text-3xl font-bold text-gray-900 dark:text-white">18</h3>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="glass-panel p-6 rounded-2xl shadow-sm hover:shadow-md transition group">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Staff Activo</p>
+                <h3 class="text-3xl font-bold text-gray-900 dark:text-white">14 <span class="text-sm font-normal text-gray-400">/ 20</span></h3>
+            </div>
+        </div>
+
+        <!-- RESTAURANTS LIST TITLE -->
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                Tus Sucursales
+                <span class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full">3</span>
+            </h2>
+            <!-- Search Small -->
+            <div class="relative hidden sm:block">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input type="text" placeholder="Buscar..." class="pl-9 pr-4 py-2 rounded-xl border-none bg-white dark:bg-dark-card shadow-sm text-sm w-64 focus:ring-2 focus:ring-keleo-500 transition placeholder-gray-400 dark:text-white">
+            </div>
+        </div>
+
+        <!-- RESTAURANTS GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            <!-- Card 1 -->
+            <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-sm hover:shadow-xl hover:shadow-keleo-500/10 transition duration-300 border border-gray-100 dark:border-dark-border group relative overflow-hidden">
+                <!-- Decorative Top Border -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-keleo-400 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition duration-500"></div>
+
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl shadow-inner">
+                            ☕️
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-keleo-600 transition">Cafetería Central</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1"><i class="fas fa-map-marker-alt text-xs mr-1"></i> Centro Histórico</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-300 hover:text-gray-500 dark:hover:text-gray-200 transition">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                        <p class="text-xs text-gray-400 mb-1">Ventas Hoy</p>
+                        <p class="font-bold text-gray-800 dark:text-white">$12,450</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                        <p class="text-xs text-gray-400 mb-1">Mesas</p>
+                        <p class="font-bold text-gray-800 dark:text-white"><span class="text-green-500">8</span> / 12</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-auto">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Abierto
+                    </span>
+                    <a href="#" class="flex items-center gap-2 text-sm font-bold text-keleo-600 dark:text-keleo-400 hover:text-keleo-700 transition">
+                        Entrar al Panel <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-sm hover:shadow-xl hover:shadow-keleo-500/10 transition duration-300 border border-gray-100 dark:border-dark-border group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500 transform scale-x-0 group-hover:scale-x-100 transition duration-500"></div>
+
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl shadow-inner">
+                            🍔
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-keleo-600 transition">Burger House</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1"><i class="fas fa-map-marker-alt text-xs mr-1"></i> Plaza Satélite</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-300 hover:text-gray-500 dark:hover:text-gray-200 transition">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                        <p class="text-xs text-gray-400 mb-1">Ventas Hoy</p>
+                        <p class="font-bold text-gray-800 dark:text-white">$11,900</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                        <p class="text-xs text-gray-400 mb-1">Mesas</p>
+                        <p class="font-bold text-gray-800 dark:text-white"><span class="text-orange-500">14</span> / 20</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-auto">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Abierto
+                    </span>
+                    <a href="#" class="flex items-center gap-2 text-sm font-bold text-keleo-600 dark:text-keleo-400 hover:text-keleo-700 transition">
+                        Entrar al Panel <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3 (Closed) -->
+            <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-sm hover:shadow-md transition duration-300 border border-gray-100 dark:border-dark-border group opacity-75 hover:opacity-100">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-2xl shadow-inner grayscale">
+                            🌮
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">Tacos El Güero</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1"><i class="fas fa-map-marker-alt text-xs mr-1"></i> Coyoacán</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-300 hover:text-gray-500 transition">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6 opacity-50">
+                    <div class="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                        <p class="text-xs text-gray-400 mb-1">Ventas Hoy</p>
+                        <p class="font-bold text-gray-800 dark:text-white">$0</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                        <p class="text-xs text-gray-400 mb-1">Mesas</p>
+                        <p class="font-bold text-gray-800 dark:text-white">0 / 8</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-auto">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                        <i class="fas fa-moon text-[10px]"></i> Cerrado
+                    </span>
+                    <a href="#" class="flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">
+                        Ver Historial <i class="fas fa-chevron-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Dark Mode Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            if (isDark) {
+                applyTheme(false);
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme(true);
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

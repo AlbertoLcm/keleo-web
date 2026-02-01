@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mesas | Keleo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        keleo: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            text: '#f8fafc',
+                            sidebar: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, div, nav, aside, input, button, a, span, h1, h2, h3, p, li {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Glassmorphism Styles (Consistente) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-header {
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Table Status Colors */
+        .status-free { border-top: 4px solid #10b981; } /* Green */
+        .status-occupied { border-top: 4px solid #ef4444; } /* Red */
+        .status-reserved { border-top: 4px solid #f59e0b; } /* Orange */
+        .status-payment { border-top: 4px solid #3b82f6; } /* Blue */
+
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 h-screen overflow-hidden flex selection:bg-keleo-200 dark:selection:bg-keleo-900">
+
+    <!-- SIDEBAR (Glass Effect) -->
+    <aside class="w-64 glass-panel hidden md:flex flex-col z-30 relative h-full">
+        <!-- Logo Area -->
+        <div class="h-20 flex items-center px-6 border-b border-gray-200/50 dark:border-white/5">
+            <a href="dashboard.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-keleo-600 rounded-xl flex items-center justify-center text-white text-sm shadow-lg shadow-keleo-500/20 group-hover:scale-105 transition">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600">App</span></span>
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="flex-grow overflow-y-auto py-6 px-3 space-y-1">
+            <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 pl-4">Principal</p>
+            
+            <!-- Dashboard (Inactive) -->
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-home w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <!-- Mesas (Active) -->
+            <a href="mesas.html" class="flex items-center gap-3 px-3 py-2.5 bg-keleo-50/80 dark:bg-keleo-900/30 text-keleo-700 dark:text-keleo-300 rounded-xl transition font-medium border border-keleo-100 dark:border-transparent shadow-sm">
+                <i class="fas fa-th-large w-5 text-center"></i>
+                <span>Mesas</span>
+            </a>
+
+            <!-- Pedidos -->
+            <a href="pedidos.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-receipt w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Pedidos</span>
+                <span class="ml-auto bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300 text-xs font-bold px-2 py-0.5 rounded-full shadow-sm">3</span>
+            </a>
+
+            <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-2 pl-4">Gestión</p>
+
+            <!-- Menú -->
+            <a href="menu.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-book-open w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Menú y Platillos</span>
+            </a>
+
+            <!-- Empleados -->
+            <a href="empleados.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-users w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Empleados</span>
+            </a>
+
+            <!-- Configuración -->
+            <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-cog w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Configuración</span>
+            </a>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-gray-200/50 dark:border-white/5">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition text-sm font-medium hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cambiar Restaurante</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <!-- Background Atmosphere -->
+        <div class="absolute inset-0 pointer-events-none z-0">
+             <div class="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] bg-keleo-200/30 dark:bg-keleo-900/10 rounded-full blur-[100px]"></div>
+             <div class="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-100/40 dark:bg-blue-900/5 rounded-full blur-[100px]"></div>
+        </div>
+
+        <!-- TOP BAR (Glass Effect) -->
+        <header class="h-20 glass-header flex items-center justify-between px-6 z-20 sticky top-0">
+            <!-- Left: Title & Actions -->
+            <div class="flex flex-col">
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">Mapa de Mesas</h1>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Gestiona la distribución y estado en tiempo real</p>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex bg-gray-100 dark:bg-white/5 p-1 rounded-xl">
+                    <button class="px-3 py-1.5 bg-white dark:bg-dark-card shadow-sm rounded-lg text-xs font-bold text-gray-800 dark:text-white">Mapa</button>
+                    <button class="px-3 py-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-xs font-medium transition">Lista</button>
+                </div>
+                
+                <button class="flex items-center gap-2 px-4 py-2 bg-keleo-600 hover:bg-keleo-700 text-white rounded-xl shadow-lg shadow-keleo-500/20 transition text-sm font-bold">
+                    <i class="fas fa-plus"></i> <span class="hidden sm:inline">Nueva Mesa</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="w-9 h-9 rounded-full bg-white dark:bg-white/5 text-gray-500 dark:text-yellow-400 hover:bg-gray-50 dark:hover:bg-white/10 transition flex items-center justify-center border border-gray-200 dark:border-transparent shadow-sm">
+                    <i id="theme-icon" class="fas fa-moon text-xs"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- TABLES CONTENT -->
+        <main class="flex-1 overflow-y-auto p-6 z-10 scroll-smooth">
+            
+            <!-- Filters & Zones -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                <!-- Zone Tabs -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
+                    <button class="px-4 py-2 bg-keleo-600 text-white rounded-xl shadow-md shadow-keleo-500/20 text-sm font-bold whitespace-nowrap transition">
+                        Todos
+                    </button>
+                    <button class="px-4 py-2 bg-white/60 dark:bg-dark-card/60 backdrop-blur-md hover:bg-white dark:hover:bg-dark-card text-gray-600 dark:text-gray-300 rounded-xl border border-white/50 dark:border-white/5 text-sm font-medium whitespace-nowrap transition">
+                        Salón Principal
+                    </button>
+                    <button class="px-4 py-2 bg-white/60 dark:bg-dark-card/60 backdrop-blur-md hover:bg-white dark:hover:bg-dark-card text-gray-600 dark:text-gray-300 rounded-xl border border-white/50 dark:border-white/5 text-sm font-medium whitespace-nowrap transition">
+                        Terraza
+                    </button>
+                    <button class="px-4 py-2 bg-white/60 dark:bg-dark-card/60 backdrop-blur-md hover:bg-white dark:hover:bg-dark-card text-gray-600 dark:text-gray-300 rounded-xl border border-white/50 dark:border-white/5 text-sm font-medium whitespace-nowrap transition">
+                        Barra
+                    </button>
+                </div>
+
+                <!-- Status Legend -->
+                <div class="flex items-center gap-4 text-xs font-medium text-gray-500 dark:text-gray-400 bg-white/40 dark:bg-black/20 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Libre</div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500"></span> Ocupada</div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Pagando</div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Reservada</div>
+                </div>
+            </div>
+
+            <!-- Tables Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                <!-- Table 1: Occupied -->
+                <div class="relative bg-white/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-5 border border-white/50 dark:border-white/5 status-occupied group cursor-pointer">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Mesa 1</h3>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Salón Principal</span>
+                        </div>
+                        <span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-bold px-2 py-1 rounded-lg">Ocupada</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-dark-card flex items-center justify-center text-xs font-bold text-gray-500">JP</div>
+                            <div class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white dark:border-dark-card flex items-center justify-center"><i class="fas fa-plus text-xs text-gray-400"></i></div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-400">Tiempo</p>
+                            <p class="text-sm font-bold text-gray-700 dark:text-gray-200">45 min</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400">Total actual</p>
+                            <p class="text-lg font-bold text-keleo-600 dark:text-keleo-400">$850.00</p>
+                        </div>
+                        <button class="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/10 hover:bg-keleo-600 hover:text-white dark:hover:bg-keleo-600 transition flex items-center justify-center text-gray-500">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table 2: Free -->
+                <div class="relative bg-white/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-5 border border-white/50 dark:border-white/5 status-free group cursor-pointer">
+                    <div class="flex justify-between items-start mb-12">
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Mesa 2</h3>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Salón Principal</span>
+                        </div>
+                        <span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded-lg">Libre</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center justify-center py-2 opacity-50 group-hover:opacity-100 transition">
+                         <i class="fas fa-chair text-3xl text-gray-300 dark:text-gray-600 mb-2"></i>
+                         <p class="text-xs text-gray-400">Capacidad: 4</p>
+                    </div>
+
+                    <div class="absolute inset-0 bg-white/90 dark:bg-dark-card/90 opacity-0 group-hover:opacity-100 transition flex items-center justify-center rounded-2xl backdrop-blur-sm">
+                        <button class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg transform scale-90 group-hover:scale-100 transition">
+                            Asignar Mesa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table 3: Payment -->
+                <div class="relative bg-white/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-5 border border-white/50 dark:border-white/5 status-payment group cursor-pointer">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Mesa 3</h3>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Terraza</span>
+                        </div>
+                        <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold px-2 py-1 rounded-lg animate-pulse">Por Pagar</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex -space-x-2">
+                             <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-dark-card flex items-center justify-center text-xs font-bold text-gray-500">MR</div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-400">Método</p>
+                            <p class="text-sm font-bold text-gray-700 dark:text-gray-200"><i class="fas fa-credit-card mr-1"></i> Tarjeta</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400">Total final</p>
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">$1,250.00</p>
+                        </div>
+                        <button class="px-3 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold shadow-md shadow-blue-500/30 transition">
+                            Cobrar
+                        </button>
+                    </div>
+                </div>
+
+                 <!-- Table 4: Reserved -->
+                 <div class="relative bg-white/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-5 border border-white/50 dark:border-white/5 status-reserved group cursor-pointer">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Mesa 4</h3>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Salón Principal</span>
+                        </div>
+                        <span class="bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-bold px-2 py-1 rounded-lg">Reservada</span>
+                    </div>
+                    
+                    <div class="flex flex-col justify-center h-20 mb-2">
+                         <div class="flex items-center gap-2 mb-1">
+                             <i class="far fa-clock text-amber-500"></i>
+                             <span class="font-bold text-gray-800 dark:text-white">8:30 PM</span>
+                         </div>
+                         <p class="text-sm text-gray-600 dark:text-gray-300">Familia Rodríguez (6p)</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+                        <span class="text-xs text-gray-400">En 45 min</span>
+                        <button class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-md shadow-amber-500/30 transition">
+                            Check-in
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table 5: Occupied -->
+                <div class="relative bg-white/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-5 border border-white/50 dark:border-white/5 status-occupied group cursor-pointer">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Mesa 5</h3>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Barra</span>
+                        </div>
+                        <span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-bold px-2 py-1 rounded-lg">Ocupada</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-dark-card flex items-center justify-center text-xs font-bold text-gray-500">LC</div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-400">Tiempo</p>
+                            <p class="text-sm font-bold text-gray-700 dark:text-gray-200">15 min</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400">Total actual</p>
+                            <p class="text-lg font-bold text-keleo-600 dark:text-keleo-400">$320.00</p>
+                        </div>
+                        <button class="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/10 hover:bg-keleo-600 hover:text-white dark:hover:bg-keleo-600 transition flex items-center justify-center text-gray-500">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                 <!-- Table 6: Free -->
+                 <div class="relative bg-white/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-5 border border-white/50 dark:border-white/5 status-free group cursor-pointer">
+                    <div class="flex justify-between items-start mb-12">
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Mesa 6</h3>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Terraza</span>
+                        </div>
+                        <span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded-lg">Libre</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center justify-center py-2 opacity-50 group-hover:opacity-100 transition">
+                         <i class="fas fa-chair text-3xl text-gray-300 dark:text-gray-600 mb-2"></i>
+                         <p class="text-xs text-gray-400">Capacidad: 2</p>
+                    </div>
+
+                    <div class="absolute inset-0 bg-white/90 dark:bg-dark-card/90 opacity-0 group-hover:opacity-100 transition flex items-center justify-center rounded-2xl backdrop-blur-sm">
+                        <button class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg transform scale-90 group-hover:scale-100 transition">
+                            Asignar Mesa
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Dark Mode Script (Global) -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            if (isDark) {
+                applyTheme(false);
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme(true);
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

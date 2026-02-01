@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración | Keleo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        keleo: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            text: '#f8fafc',
+                            sidebar: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, div, nav, aside, input, button, a, span, h1, h2, h3, p, li, select, textarea {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-header {
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Custom Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #7c3aed;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #7c3aed;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 h-screen overflow-hidden flex selection:bg-keleo-200 dark:selection:bg-keleo-900">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 glass-panel hidden md:flex flex-col z-30 relative h-full">
+        <div class="h-20 flex items-center px-6 border-b border-gray-200/50 dark:border-white/5">
+            <a href="dashboard.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-keleo-600 rounded-xl flex items-center justify-center text-white text-sm shadow-lg shadow-keleo-500/20 group-hover:scale-105 transition">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600">App</span></span>
+            </a>
+        </div>
+
+        <div class="flex-grow overflow-y-auto py-6 px-3 space-y-1">
+            <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 pl-4">Principal</p>
+            
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-home w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="mesas.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-th-large w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Mesas</span>
+            </a>
+
+            <a href="pedidos.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-receipt w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Pedidos</span>
+                <span class="ml-auto bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300 text-xs font-bold px-2 py-0.5 rounded-full shadow-sm">3</span>
+            </a>
+
+            <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-2 pl-4">Gestión</p>
+
+            <a href="menu.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-book-open w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Menú y Platillos</span>
+            </a>
+
+            <a href="empleados.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-users w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Empleados</span>
+            </a>
+
+            <!-- Configuración (Active) -->
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 bg-keleo-50/80 dark:bg-keleo-900/30 text-keleo-700 dark:text-keleo-300 rounded-xl transition font-medium border border-keleo-100 dark:border-transparent shadow-sm">
+                <i class="fas fa-cog w-5 text-center"></i>
+                <span>Configuración</span>
+            </a>
+        </div>
+
+        <div class="p-4 border-t border-gray-200/50 dark:border-white/5">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition text-sm font-medium hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cambiar Restaurante</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <!-- Atmosphere -->
+        <div class="absolute inset-0 pointer-events-none z-0">
+             <div class="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] bg-keleo-200/30 dark:bg-keleo-900/10 rounded-full blur-[100px]"></div>
+             <div class="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-100/40 dark:bg-blue-900/5 rounded-full blur-[100px]"></div>
+        </div>
+
+        <!-- TOP BAR -->
+        <header class="h-20 glass-header flex items-center justify-between px-6 z-20 sticky top-0">
+            <div class="flex flex-col">
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">Ajustes del Restaurante</h1>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Personaliza tu perfil y operaciones</p>
+            </div>
+
+            <div class="flex items-center gap-4">
+                 <button class="flex items-center gap-2 px-4 py-2 bg-keleo-600 hover:bg-keleo-700 text-white rounded-xl shadow-lg shadow-keleo-500/20 transition text-sm font-bold">
+                    <i class="fas fa-save"></i> <span class="hidden sm:inline">Guardar Cambios</span>
+                </button>
+
+                <button id="theme-toggle" class="w-9 h-9 rounded-full bg-white dark:bg-white/5 text-gray-500 dark:text-yellow-400 hover:bg-gray-50 dark:hover:bg-white/10 transition flex items-center justify-center border border-gray-200 dark:border-transparent shadow-sm">
+                    <i id="theme-icon" class="fas fa-moon text-xs"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- SETTINGS CONTENT -->
+        <main class="flex-1 overflow-y-auto p-6 z-10 scroll-smooth">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                
+                <!-- Settings Navigation (Sticky) -->
+                <div class="hidden lg:block lg:col-span-1">
+                    <nav class="space-y-1 sticky top-0">
+                        <a href="#perfil" class="flex items-center gap-3 px-4 py-3 bg-white/60 dark:bg-white/10 backdrop-blur-md rounded-xl text-sm font-bold text-keleo-700 dark:text-white border-l-4 border-keleo-600 shadow-sm transition">
+                            Perfl y Marca
+                        </a>
+                        <a href="#horarios" class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 rounded-xl text-sm font-medium transition">
+                            Horarios de Atención
+                        </a>
+                        <a href="#cocina" class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 rounded-xl text-sm font-medium transition">
+                            Operación y Cocina
+                        </a>
+                        <a href="#cuenta" class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 rounded-xl text-sm font-medium transition">
+                            Cuenta y Pagos
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Settings Forms -->
+                <div class="lg:col-span-3 space-y-8">
+
+                    <!-- SECTION 1: PERFIL -->
+                    <section id="perfil" class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 dark:border-white/5 p-6">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-100 dark:border-white/5 pb-4">
+                            <i class="fas fa-store text-keleo-500 mr-2"></i> Perfil del Restaurante
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Logo Upload -->
+                            <div class="md:col-span-2 flex items-center gap-6">
+                                <div class="w-24 h-24 rounded-2xl bg-gray-100 dark:bg-white/5 border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-400">
+                                    <i class="fas fa-image text-3xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800 dark:text-white">Logo del Restaurante</h3>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Recomendado: 500x500px, PNG o JPG</p>
+                                    <button class="px-4 py-2 bg-white dark:bg-white/10 border border-gray-200 dark:border-transparent rounded-lg text-xs font-bold hover:bg-gray-50 dark:hover:bg-white/20 transition">
+                                        Subir Imagen
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Nombre del Negocio</label>
+                                <input type="text" value="Cafetería Central" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 focus:border-keleo-500 focus:ring-2 focus:ring-keleo-500/20 outline-none transition text-sm dark:text-white">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Teléfono de Contacto</label>
+                                <input type="text" value="+52 55 1234 5678" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 focus:border-keleo-500 focus:ring-2 focus:ring-keleo-500/20 outline-none transition text-sm dark:text-white">
+                            </div>
+
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Dirección</label>
+                                <input type="text" value="Av. Juárez 102, Centro Histórico, CDMX" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 focus:border-keleo-500 focus:ring-2 focus:ring-keleo-500/20 outline-none transition text-sm dark:text-white">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 2: HORARIOS -->
+                    <section id="horarios" class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 dark:border-white/5 p-6">
+                         <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-100 dark:border-white/5 pb-4">
+                            <i class="fas fa-clock text-keleo-500 mr-2"></i> Horarios de Atención
+                        </h2>
+
+                        <div class="space-y-4">
+                            <!-- Lunes -->
+                            <div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/5 transition">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" checked class="w-4 h-4 text-keleo-600 rounded focus:ring-keleo-500">
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Lunes - Viernes</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <input type="time" value="08:00" class="bg-gray-50 dark:bg-white/10 border-none rounded-lg text-xs px-2 py-1 text-gray-600 dark:text-white">
+                                    <span class="text-gray-400">-</span>
+                                    <input type="time" value="22:00" class="bg-gray-50 dark:bg-white/10 border-none rounded-lg text-xs px-2 py-1 text-gray-600 dark:text-white">
+                                </div>
+                            </div>
+                             <!-- Sabado -->
+                             <div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/5 transition">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" checked class="w-4 h-4 text-keleo-600 rounded focus:ring-keleo-500">
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Sábado</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <input type="time" value="09:00" class="bg-gray-50 dark:bg-white/10 border-none rounded-lg text-xs px-2 py-1 text-gray-600 dark:text-white">
+                                    <span class="text-gray-400">-</span>
+                                    <input type="time" value="23:00" class="bg-gray-50 dark:bg-white/10 border-none rounded-lg text-xs px-2 py-1 text-gray-600 dark:text-white">
+                                </div>
+                            </div>
+                            <!-- Domingo -->
+                            <div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/5 transition opacity-60">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="w-4 h-4 text-keleo-600 rounded focus:ring-keleo-500">
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Domingo</span>
+                                </div>
+                                <span class="text-xs font-bold text-gray-400">CERRADO</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 3: OPERACIÓN -->
+                    <section id="cocina" class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 dark:border-white/5 p-6">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-100 dark:border-white/5 pb-4">
+                           <i class="fas fa-cogs text-keleo-500 mr-2"></i> Operación
+                       </h2>
+
+                       <div class="space-y-6">
+                           <!-- Notification Toggle -->
+                           <div class="flex items-center justify-between">
+                               <div>
+                                   <h3 class="text-sm font-bold text-gray-800 dark:text-white">Notificaciones de Cocina</h3>
+                                   <p class="text-xs text-gray-500 dark:text-gray-400">Sonido de alerta al recibir nueva comanda</p>
+                               </div>
+                               <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                   <input type="checkbox" name="toggle" id="toggle_sound" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-300 checked:right-0 checked:border-keleo-600 transition-all duration-300" checked/>
+                                   <label for="toggle_sound" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
+                               </div>
+                           </div>
+
+                           <!-- Printer IP -->
+                           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                               <div class="space-y-2">
+                                   <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">IP Impresora Cocina</label>
+                                   <input type="text" value="192.168.1.50" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 focus:border-keleo-500 outline-none text-sm dark:text-white font-mono">
+                               </div>
+                               <div class="space-y-2">
+                                   <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Tiempo Alerta Retraso (min)</label>
+                                   <input type="number" value="15" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 focus:border-keleo-500 outline-none text-sm dark:text-white">
+                               </div>
+                           </div>
+                       </div>
+                   </section>
+
+                   <!-- SECTION 4: DANGER ZONE -->
+                   <section class="bg-red-50/50 dark:bg-red-900/10 backdrop-blur-md rounded-2xl shadow-sm border border-red-100 dark:border-red-900/20 p-6">
+                        <h2 class="text-lg font-bold text-red-600 dark:text-red-400 mb-4">Zona de Peligro</h2>
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Eliminar este restaurante borrará todos los datos de ventas, empleados y menús permanentemente.</p>
+                            <button class="px-5 py-2 bg-white dark:bg-transparent border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-xs font-bold rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 transition whitespace-nowrap">
+                                Eliminar Restaurante
+                            </button>
+                        </div>
+                   </section>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Dark Mode Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            if (isDark) {
+                applyTheme(false);
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme(true);
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

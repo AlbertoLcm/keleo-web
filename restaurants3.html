@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Restaurantes | Keleo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        keleo: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed', // Color principal
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            bg: '#0f172a',    // Slate 900
+                            card: '#1e293b',  // Slate 800
+                            border: '#334155', // Slate 700
+                            hover: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body, div, nav, input, button, a, span, h1, h2, h3, p {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        /* Ocultar scrollbar pero permitir scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 min-h-screen flex flex-col">
+
+    <!-- NAV BAR -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-dark-card/90 backdrop-blur-md border-b border-gray-200 dark:border-dark-border">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            
+            <!-- Logo & Context -->
+            <div class="flex items-center gap-6">
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-keleo-500 to-keleo-700 rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-keleo-500/30 group-hover:scale-105 transition">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800 dark:text-white tracking-tight hidden sm:block">
+                        Keleo<span class="text-keleo-600">App</span>
+                    </span>
+                </a>
+                
+                <!-- Divider -->
+                <div class="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block"></div>
+                
+                <span class="text-sm font-medium text-gray-500 dark:text-gray-400 hidden sm:block bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
+                    Vista General
+                </span>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition flex items-center justify-center focus:outline-none">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+
+                <!-- Notifications -->
+                <button class="relative w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition flex items-center justify-center">
+                    <i class="far fa-bell"></i>
+                    <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-dark-card"></span>
+                </button>
+
+                <!-- User Profile -->
+                <div class="flex items-center gap-3 pl-2 cursor-pointer group border-l border-gray-200 dark:border-gray-700 ml-2">
+                    <div class="text-right hidden md:block pl-4">
+                        <div class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-keleo-600 dark:group-hover:text-keleo-400 transition">Luis Cruz</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">Propietario</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm group-hover:border-keleo-500 transition">
+                         <div class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-300 font-bold">LC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow container mx-auto px-6 py-8">
+        
+        <!-- Welcome Banner & Global Stats -->
+        <div class="bg-gradient-to-r from-keleo-900 to-indigo-900 rounded-3xl p-8 mb-10 text-white relative overflow-hidden shadow-2xl">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-keleo-500/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div>
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold text-keleo-100 border border-white/10 mb-3 inline-block">
+                        👋 ¡Hola de nuevo, Luis!
+                    </span>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-2">Resumen Global</h1>
+                    <p class="text-keleo-100 max-w-xl">Aquí tienes el rendimiento agregado de todas tus sucursales hoy.</p>
+                </div>
+                
+                <!-- Global Metrics Pill -->
+                <div class="flex gap-4 md:gap-8 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+                    <div>
+                        <p class="text-xs text-keleo-200 mb-1">Ventas Totales</p>
+                        <p class="text-2xl font-bold">$24,500</p>
+                    </div>
+                    <div class="w-px bg-white/20"></div>
+                    <div>
+                        <p class="text-xs text-keleo-200 mb-1">Pedidos Activos</p>
+                        <p class="text-2xl font-bold">18</p>
+                    </div>
+                    <div class="w-px bg-white/20"></div>
+                    <div>
+                        <p class="text-xs text-keleo-200 mb-1">Sucursales Abiertas</p>
+                        <p class="text-2xl font-bold">2<span class="text-sm font-normal text-keleo-300">/3</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters & Actions -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                Tus Restaurantes
+                <span class="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-xs px-2 py-1 rounded-full">3</span>
+            </h2>
+
+            <div class="flex gap-3 w-full md:w-auto">
+                <div class="relative w-full md:w-64">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Buscar..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-card text-sm focus:outline-none focus:ring-2 focus:ring-keleo-500 dark:text-white transition shadow-sm">
+                </div>
+                <button class="bg-keleo-600 hover:bg-keleo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-keleo-500/20 flex items-center gap-2 transition transform hover:-translate-y-0.5 active:scale-95 whitespace-nowrap">
+                    <i class="fas fa-plus"></i> Nueva Sucursal
+                </button>
+            </div>
+        </div>
+
+        <!-- RESTAURANTS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Card 1: High Performing -->
+            <div class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-xl hover:shadow-keleo-500/5 transition-all duration-300 flex flex-col">
+                <!-- Cover Image Area -->
+                <div class="h-32 bg-gray-100 relative overflow-hidden">
+                    <!-- Placeholder Image Gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <div class="w-full h-full bg-cover bg-center transform group-hover:scale-110 transition duration-700" style="background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop');"></div>
+                    
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="bg-green-500/90 backdrop-blur text-white text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Abierto
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-5 flex-grow flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white group-hover:text-keleo-600 transition">Cafetería Central</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                <i class="fas fa-map-pin text-gray-400"></i> Centro Histórico, CDMX
+                            </p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <!-- Quick Stats Grid -->
+                    <div class="grid grid-cols-3 gap-2 py-4 mt-2 border-t border-b border-gray-100 dark:border-dark-border">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-400 mb-1">Ventas Hoy</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">$12,450</p>
+                        </div>
+                        <div class="text-center border-l border-r border-gray-100 dark:border-dark-border">
+                            <p class="text-xs text-gray-400 mb-1">Mesas</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">8/12</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-400 mb-1">Staff</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">5 Activos</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-1 flex gap-2">
+                        <a href="#" class="flex-1 bg-keleo-600 hover:bg-keleo-700 text-white py-2 rounded-lg text-sm font-semibold text-center transition shadow-lg shadow-keleo-500/20">
+                            Gestionar
+                        </a>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-dark-border text-gray-500 hover:bg-gray-50 dark:hover:bg-dark-hover transition">
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Moderate Activity -->
+            <div class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-xl hover:shadow-keleo-500/5 transition-all duration-300 flex flex-col">
+                <div class="h-32 bg-gray-100 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <div class="w-full h-full bg-cover bg-center transform group-hover:scale-110 transition duration-700" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="bg-green-500/90 backdrop-blur text-white text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Abierto
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-5 flex-grow flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white group-hover:text-keleo-600 transition">Burger House Sur</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                <i class="fas fa-map-pin text-gray-400"></i> Coyoacán, CDMX
+                            </p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 py-4 mt-2 border-t border-b border-gray-100 dark:border-dark-border">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-400 mb-1">Ventas Hoy</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">$8,200</p>
+                        </div>
+                        <div class="text-center border-l border-r border-gray-100 dark:border-dark-border">
+                            <p class="text-xs text-gray-400 mb-1">Mesas</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">4/10</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-400 mb-1">Staff</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">3 Activos</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-1 flex gap-2">
+                        <a href="#" class="flex-1 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white hover:border-keleo-500 hover:text-keleo-600 dark:hover:border-keleo-400 dark:hover:text-keleo-400 py-2 rounded-lg text-sm font-semibold text-center transition">
+                            Gestionar
+                        </a>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-dark-border text-gray-500 hover:bg-gray-50 dark:hover:bg-dark-hover transition">
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Closed -->
+            <div class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all duration-300 flex flex-col opacity-75 hover:opacity-100">
+                <div class="h-32 bg-gray-100 relative overflow-hidden grayscale group-hover:grayscale-0 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="bg-gray-800/90 backdrop-blur text-gray-300 text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
+                            <i class="fas fa-moon text-[10px]"></i> Cerrado
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-5 flex-grow flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white">Sucursal Norte</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                <i class="fas fa-map-pin text-gray-400"></i> Satélite, Edo. Mex
+                            </p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex-grow flex items-center justify-center py-6 text-sm text-gray-400 italic">
+                        Sin actividad por el momento
+                    </div>
+
+                    <div class="mt-4 pt-1 flex gap-2">
+                        <a href="#" class="flex-1 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white hover:border-gray-400 py-2 rounded-lg text-sm font-semibold text-center transition">
+                            Ver Historial
+                        </a>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-dark-border text-gray-500 hover:bg-gray-50 dark:hover:bg-dark-hover transition">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add New Placeholder -->
+            <button class="group relative flex flex-col items-center justify-center min-h-[300px] rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-keleo-500 dark:hover:border-keleo-500 bg-gray-50 dark:bg-dark-card/50 hover:bg-keleo-50/50 dark:hover:bg-keleo-900/10 transition-all duration-300">
+                <div class="w-16 h-16 rounded-full bg-white dark:bg-gray-800 shadow-sm group-hover:shadow-md group-hover:scale-110 flex items-center justify-center text-gray-400 group-hover:text-keleo-600 dark:group-hover:text-keleo-400 transition mb-4">
+                    <i class="fas fa-plus text-2xl"></i>
+                </div>
+                <h3 class="font-bold text-gray-600 dark:text-gray-300 group-hover:text-keleo-700 dark:group-hover:text-keleo-300 transition">Registrar Sucursal</h3>
+                <p class="text-xs text-gray-400 mt-1">Añade un nuevo local a tu red</p>
+            </button>
+
+        </div>
+    </main>
+    
+    <!-- Footer simple -->
+    <footer class="mt-auto border-t border-gray-200 dark:border-dark-border py-6 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+            <p>&copy; 2024 Keleo App Inc. Todos los derechos reservados.</p>
+            <div class="flex gap-4 mt-2 md:mt-0">
+                <a href="#" class="hover:text-keleo-600">Ayuda</a>
+                <a href="#" class="hover:text-keleo-600">Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            if (isDark) {
+                applyTheme(false);
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme(true);
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

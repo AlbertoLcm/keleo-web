@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Restaurante | Keleo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        keleo: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            text: '#f8fafc',
+                            sidebar: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, div, nav, aside, input, button, a, span, h1, h2, h3, p, li {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Glassmorphism Styles (Igual que Landing) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-header {
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Animation for chart bars */
+        @keyframes growUp {
+            from { height: 0; }
+        }
+        .bar-animate {
+            animation: growUp 1s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 h-screen overflow-hidden flex selection:bg-keleo-200 dark:selection:bg-keleo-900">
+
+    <!-- SIDEBAR (Glass Effect) -->
+    <aside class="w-64 glass-panel hidden md:flex flex-col z-30 relative h-full">
+        <!-- Logo Area -->
+        <div class="h-20 flex items-center px-6 border-b border-gray-200/50 dark:border-white/5">
+            <a href="dashboard.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-keleo-600 rounded-xl flex items-center justify-center text-white text-sm shadow-lg shadow-keleo-500/20 group-hover:scale-105 transition">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600">App</span></span>
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="flex-grow overflow-y-auto py-6 px-3 space-y-1">
+            <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 pl-4">Principal</p>
+            
+            <!-- Dashboard (Active) -->
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 bg-keleo-50/80 dark:bg-keleo-900/30 text-keleo-700 dark:text-keleo-300 rounded-xl transition font-medium border border-keleo-100 dark:border-transparent">
+                <i class="fas fa-home w-5 text-center"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <!-- Mesas -->
+            <a href="mesas.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-th-large w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Mesas</span>
+            </a>
+
+            <!-- Pedidos -->
+            <a href="pedidos.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-receipt w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Pedidos</span>
+                <span class="ml-auto bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300 text-xs font-bold px-2 py-0.5 rounded-full shadow-sm">3</span>
+            </a>
+
+            <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-2 pl-4">Gestión</p>
+
+            <!-- Menú -->
+            <a href="menu.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-book-open w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Menú y Platillos</span>
+            </a>
+
+            <!-- Empleados -->
+            <a href="empleados.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-users w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Empleados</span>
+            </a>
+
+            <!-- Configuración -->
+            <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white rounded-xl transition font-medium group">
+                <i class="fas fa-cog w-5 text-center group-hover:text-keleo-500 transition"></i>
+                <span>Configuración</span>
+            </a>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-gray-200/50 dark:border-white/5">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition text-sm font-medium hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cambiar Restaurante</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <!-- Background Atmosphere -->
+        <div class="absolute inset-0 pointer-events-none z-0">
+             <div class="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] bg-keleo-200/30 dark:bg-keleo-900/10 rounded-full blur-[100px]"></div>
+             <div class="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-100/40 dark:bg-blue-900/5 rounded-full blur-[100px]"></div>
+        </div>
+
+        <!-- TOP BAR (Glass Effect) -->
+        <header class="h-20 glass-header flex items-center justify-between px-6 z-20 sticky top-0">
+            <!-- Left: Breadcrumb & Title -->
+            <div class="flex flex-col">
+                <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                    <a href="dashboard.html" class="hover:text-keleo-600 transition">Mis Restaurantes</a>
+                    <i class="fas fa-chevron-right text-[10px] text-gray-300"></i>
+                    <span class="text-gray-800 dark:text-white font-medium bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded-md">Cafetería Central</span>
+                </div>
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white mt-1">Panel de Control</h1>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Mobile Menu Trigger -->
+                <button class="md:hidden text-gray-500 dark:text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <!-- Status Indicator -->
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-green-100/80 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-bold border border-green-200 dark:border-green-800 backdrop-blur-sm shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Abierto
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="w-9 h-9 rounded-full bg-white dark:bg-white/5 text-gray-500 dark:text-yellow-400 hover:bg-gray-50 dark:hover:bg-white/10 transition flex items-center justify-center border border-gray-200 dark:border-transparent shadow-sm">
+                    <i id="theme-icon" class="fas fa-moon text-xs"></i>
+                </button>
+
+                <!-- Profile -->
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-keleo-500 to-indigo-500 p-[2px] cursor-pointer shadow-md shadow-keleo-500/20">
+                    <div class="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center text-xs font-bold text-keleo-600 dark:text-keleo-400">
+                        LC
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD CONTENT -->
+        <main class="flex-1 overflow-y-auto p-6 z-10 scroll-smooth">
+            
+            <!-- ROW 1: Quick Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-white/50 dark:border-white/5 flex flex-col justify-between h-32 hover:shadow-lg hover:shadow-keleo-500/5 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Ventas Hoy</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">$4,250</h3>
+                        </div>
+                        <div class="p-2 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-xl shadow-sm">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1 text-xs text-green-500 font-medium">
+                        <i class="fas fa-arrow-up"></i> 8% vs ayer
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-white/50 dark:border-white/5 flex flex-col justify-between h-32 hover:shadow-lg hover:shadow-keleo-500/5 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Mesas Activas</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">8 <span class="text-sm font-normal text-gray-400">/ 12</span></h3>
+                        </div>
+                        <div class="p-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 rounded-xl shadow-sm">
+                            <i class="fas fa-chair"></i>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-orange-500 h-1.5 rounded-full" style="width: 66%"></div>
+                    </div>
+                </div>
+
+                 <!-- Card 3 -->
+                 <div class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-white/50 dark:border-white/5 flex flex-col justify-between h-32 hover:shadow-lg hover:shadow-keleo-500/5 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Pedidos Cocina</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">5</h3>
+                        </div>
+                        <div class="p-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-xl shadow-sm">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-red-500 font-medium animate-pulse flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> 2 con retraso > 15m
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-white/50 dark:border-white/5 flex flex-col justify-between h-32 hover:shadow-lg hover:shadow-keleo-500/5 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Staff Turno</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">4</h3>
+                        </div>
+                        <div class="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-500 rounded-xl shadow-sm">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                    </div>
+                    <div class="flex -space-x-2 mt-auto">
+                        <div class="w-6 h-6 rounded-full bg-gray-200 border-2 border-white dark:border-dark-card"></div>
+                        <div class="w-6 h-6 rounded-full bg-gray-300 border-2 border-white dark:border-dark-card"></div>
+                        <div class="w-6 h-6 rounded-full bg-gray-400 border-2 border-white dark:border-dark-card"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2: Graph & Shortcuts -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                
+                <!-- NEW CHART SECTION -->
+                <div class="lg:col-span-2 bg-white/60 dark:bg-dark-card/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 dark:border-white/5 p-6 flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-bold text-gray-800 dark:text-white">Rendimiento de Ventas</h2>
+                        <select class="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-transparent rounded-lg text-xs px-2 py-1 text-gray-600 dark:text-gray-300 outline-none focus:ring-1 focus:ring-keleo-500">
+                            <option>Hoy</option>
+                            <option>Esta Semana</option>
+                        </select>
+                    </div>
+                    
+                    <!-- CSS Bar Chart -->
+                    <div class="flex-grow flex items-end justify-between gap-2 md:gap-4 h-48 px-2">
+                        <!-- 12 PM -->
+                        <div class="flex flex-col items-center gap-2 w-full group">
+                            <div class="w-full bg-keleo-100 dark:bg-keleo-900/20 rounded-t-md relative h-32 flex items-end justify-center group-hover:bg-keleo-200 dark:group-hover:bg-keleo-900/40 transition-all cursor-pointer">
+                                <div class="w-full bg-keleo-500 rounded-t-md bar-animate relative" style="height: 30%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">$1,200</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400">12pm</span>
+                        </div>
+                        <!-- 2 PM -->
+                        <div class="flex flex-col items-center gap-2 w-full group">
+                            <div class="w-full bg-keleo-100 dark:bg-keleo-900/20 rounded-t-md relative h-32 flex items-end justify-center group-hover:bg-keleo-200 dark:group-hover:bg-keleo-900/40 transition-all cursor-pointer">
+                                <div class="w-full bg-keleo-500 rounded-t-md bar-animate relative" style="height: 85%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">$3,500</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400">2pm</span>
+                        </div>
+                        <!-- 4 PM -->
+                        <div class="flex flex-col items-center gap-2 w-full group">
+                            <div class="w-full bg-keleo-100 dark:bg-keleo-900/20 rounded-t-md relative h-32 flex items-end justify-center group-hover:bg-keleo-200 dark:group-hover:bg-keleo-900/40 transition-all cursor-pointer">
+                                <div class="w-full bg-keleo-500 rounded-t-md bar-animate relative" style="height: 45%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">$1,800</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400">4pm</span>
+                        </div>
+                        <!-- 6 PM -->
+                        <div class="flex flex-col items-center gap-2 w-full group">
+                            <div class="w-full bg-keleo-100 dark:bg-keleo-900/20 rounded-t-md relative h-32 flex items-end justify-center group-hover:bg-keleo-200 dark:group-hover:bg-keleo-900/40 transition-all cursor-pointer">
+                                <div class="w-full bg-keleo-500 rounded-t-md bar-animate relative" style="height: 60%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">$2,100</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400">6pm</span>
+                        </div>
+                        <!-- 8 PM -->
+                        <div class="flex flex-col items-center gap-2 w-full group">
+                            <div class="w-full bg-keleo-100 dark:bg-keleo-900/20 rounded-t-md relative h-32 flex items-end justify-center group-hover:bg-keleo-200 dark:group-hover:bg-keleo-900/40 transition-all cursor-pointer">
+                                <div class="w-full bg-keleo-500 rounded-t-md bar-animate relative" style="height: 90%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">$4,100</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400">8pm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHORTCUTS (Moved here for better flow) -->
+                <div class="bg-gradient-to-br from-keleo-600 to-indigo-600 rounded-2xl shadow-xl shadow-keleo-500/20 p-6 text-white relative overflow-hidden flex flex-col justify-center">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-black/10 rounded-full blur-xl translate-y-1/3 -translate-x-1/3"></div>
+                    
+                    <h3 class="font-bold text-lg mb-4 relative z-10 flex items-center gap-2">
+                        <i class="fas fa-bolt text-yellow-300"></i> Acciones Rápidas
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 gap-3 relative z-10">
+                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-xl flex flex-col items-center gap-2 transition border border-white/10 hover:border-white/30 group">
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="fas fa-plus text-sm"></i>
+                            </div>
+                            <span class="text-xs font-medium">Nueva Orden</span>
+                        </button>
+                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-xl flex flex-col items-center gap-2 transition border border-white/10 hover:border-white/30 group">
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="fas fa-calendar-alt text-sm"></i>
+                            </div>
+                            <span class="text-xs font-medium">Reservar</span>
+                        </button>
+                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-xl flex flex-col items-center gap-2 transition border border-white/10 hover:border-white/30 group">
+                             <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="fas fa-cash-register text-sm"></i>
+                            </div>
+                            <span class="text-xs font-medium">Cerrar Caja</span>
+                        </button>
+                        <button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-xl flex flex-col items-center gap-2 transition border border-white/10 hover:border-white/30 group">
+                             <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="fas fa-file-invoice text-sm"></i>
+                            </div>
+                            <span class="text-xs font-medium">Reporte Z</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 3: Tables & Top Selling -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Active Orders Table -->
+                <div class="lg:col-span-2 bg-white/60 dark:bg-dark-card/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 dark:border-white/5 overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 dark:border-white/5 flex justify-between items-center">
+                        <h2 class="font-bold text-gray-800 dark:text-white">Pedidos Recientes</h2>
+                        <a href="#" class="text-sm text-keleo-600 dark:text-keleo-400 hover:underline">Ver todos</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50/50 dark:bg-white/5 text-xs text-gray-500 dark:text-gray-400 uppercase">
+                                    <th class="px-6 py-4 font-semibold">Orden</th>
+                                    <th class="px-6 py-4 font-semibold">Mesa</th>
+                                    <th class="px-6 py-4 font-semibold">Estado</th>
+                                    <th class="px-6 py-4 font-semibold">Total</th>
+                                    <th class="px-6 py-4 font-semibold text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                                <!-- Row 1 -->
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">#1024</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Mesa 4</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-lg text-xs font-semibold border border-yellow-200 dark:border-yellow-800">
+                                            En Cocina
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-bold text-gray-800 dark:text-white">$450.00</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-gray-400 hover:text-keleo-600 transition p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- Row 2 -->
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">#1023</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Mesa 2</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg text-xs font-semibold border border-green-200 dark:border-green-800">
+                                            Servido
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-bold text-gray-800 dark:text-white">$120.00</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-gray-400 hover:text-keleo-600 transition p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                 <!-- Row 3 -->
+                                 <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">#1022</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">Para Llevar</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg text-xs font-semibold border border-blue-200 dark:border-blue-800">
+                                            Listo
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-bold text-gray-800 dark:text-white">$85.00</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-gray-400 hover:text-keleo-600 transition p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Selling Items -->
+                <div class="bg-white/60 dark:bg-dark-card/60 backdrop-blur-md rounded-2xl shadow-sm border border-white/50 dark:border-white/5 p-6 h-full">
+                    <h3 class="font-bold text-gray-800 dark:text-white mb-4">Más Vendidos Hoy</h3>
+                    <div class="space-y-4">
+                        <!-- Item 1 -->
+                        <div class="flex items-center gap-3 p-2 hover:bg-white/40 dark:hover:bg-white/5 rounded-xl transition cursor-pointer group">
+                            <div class="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 bg-cover bg-center shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=200');"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-keleo-600 transition">Hamburguesa Clásica</p>
+                                <p class="text-xs text-gray-500">24 unidades</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-800 dark:text-white">$3,200</span>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="flex items-center gap-3 p-2 hover:bg-white/40 dark:hover:bg-white/5 rounded-xl transition cursor-pointer group">
+                            <div class="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 bg-cover bg-center shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?q=80&w=200');"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-keleo-600 transition">Bowl de Ensalada</p>
+                                <p class="text-xs text-gray-500">18 unidades</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-800 dark:text-white">$1,980</span>
+                        </div>
+                        <!-- Item 3 -->
+                         <div class="flex items-center gap-3 p-2 hover:bg-white/40 dark:hover:bg-white/5 rounded-xl transition cursor-pointer group">
+                            <div class="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 bg-cover bg-center shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?q=80&w=200');"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold text-gray-800 dark:text-white group-hover:text-keleo-600 transition">Cheesecake Fresa</p>
+                                <p class="text-xs text-gray-500">12 unidades</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-800 dark:text-white">$960</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Dark Mode Script (Global) -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            if (isDark) {
+                applyTheme(false);
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme(true);
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

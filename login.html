@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Keleo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        keleo: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            input: '#334155',
+                            text: '#f8fafc'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, div, input, button, a {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 h-screen overflow-hidden flex flex-col md:flex-row">
+
+    <!-- LEFT SIDE - BRANDING & VISUALS (Hidden on mobile) -->
+    <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-keleo-600 to-blue-600 dark:from-keleo-900 dark:to-gray-900 relative items-center justify-center p-12 overflow-hidden">
+        <!-- Background Patterns -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+        <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+
+        <!-- Floating Content -->
+        <div class="relative z-10 max-w-md text-center">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-2xl animate-float">
+                <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-white font-medium text-sm">Actividad en Vivo</span>
+                    </div>
+                    <span class="text-white/60 text-xs">Hoy, 14:30 PM</span>
+                </div>
+                
+                <div class="space-y-4 text-left">
+                    <div class="bg-white/90 p-3 rounded-xl shadow-sm flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center text-orange-500">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800 text-sm">Mesa 5</p>
+                                <p class="text-xs text-gray-500">Nuevo pedido en cocina</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-keleo-600">+ $450</span>
+                    </div>
+
+                    <div class="bg-white/90 p-3 rounded-xl shadow-sm flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-500">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800 text-sm">Mesa 2</p>
+                                <p class="text-xs text-gray-500">Cuenta cerrada</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-green-600">Pagado</span>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <p class="text-white text-lg font-medium">"Keleo ha transformado la velocidad de nuestro servicio."</p>
+                    <div class="mt-4 flex items-center justify-center gap-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE - LOGIN FORM -->
+    <div class="w-full md:w-1/2 flex flex-col h-full bg-white dark:bg-dark-bg overflow-y-auto">
+        <!-- Top Navigation (Logo & Back) -->
+        <div class="flex justify-between items-center p-6 md:p-10">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-keleo-600 rounded flex items-center justify-center text-white text-sm shadow-md group-hover:bg-keleo-700 transition">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-800 dark:text-white">Keleo<span class="text-keleo-600">App</span></span>
+            </a>
+            
+            <div class="flex items-center gap-4">
+                 <!-- Dark Mode Toggle -->
+                 <button id="theme-toggle" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-card text-gray-500 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition flex items-center justify-center focus:outline-none">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-keleo-600 dark:text-gray-400 dark:hover:text-keleo-400 transition">
+                    Volver
+                </a>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="flex-1 flex flex-col justify-center px-6 md:px-16 lg:px-24 pb-12">
+            <div class="max-w-md mx-auto w-full">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Bienvenido de nuevo</h1>
+                <p class="text-gray-500 dark:text-gray-400 mb-8">Ingresa tus credenciales para acceder al panel.</p>
+
+                <form action="#" class="space-y-6">
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Correo Electrónico</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="email" class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition placeholder-gray-400" placeholder="nombre@restaurante.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+                            <a href="#" class="text-sm font-medium text-keleo-600 hover:text-keleo-700 dark:text-keleo-400 dark:hover:text-keleo-300">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:border-keleo-500 focus:ring-2 focus:ring-keleo-200 dark:focus:ring-keleo-900 outline-none transition placeholder-gray-400" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center">
+                        <input id="remember-me" type="checkbox" class="h-4 w-4 text-keleo-600 focus:ring-keleo-500 border-gray-300 rounded cursor-pointer">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-600 dark:text-gray-400 cursor-pointer">
+                            Mantener sesión iniciada
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-3.5 bg-keleo-600 text-white font-bold rounded-xl hover:bg-keleo-700 transition shadow-lg shadow-keleo-500/30 transform active:scale-[0.98]">
+                        Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white dark:bg-dark-bg text-gray-500 dark:text-gray-400">O continúa con</span>
+                    </div>
+                </div>
+
+                <!-- Social Login -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="flex items-center justify-center gap-2 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-dark-card transition bg-white dark:bg-transparent text-gray-700 dark:text-white">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                        <span class="text-sm font-medium">Google</span>
+                    </button>
+                    <button class="flex items-center justify-center gap-2 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-dark-card transition bg-white dark:bg-transparent text-gray-700 dark:text-white">
+                        <i class="fab fa-apple text-xl"></i>
+                        <span class="text-sm font-medium">Apple</span>
+                    </button>
+                </div>
+
+                <!-- Sign Up Link -->
+                <p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+                    ¿No tienes una cuenta? 
+                    <a href="#" class="font-bold text-keleo-600 hover:text-keleo-700 dark:text-keleo-400 dark:hover:text-keleo-300 transition">Solicita una Demo</a>
+                </p>
+            </div>
+            
+            <!-- Mobile Footer -->
+            <div class="mt-auto pt-10 text-center text-xs text-gray-400 md:hidden">
+                &copy; 2024 Keleo App.
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Dark Mode (Same logic as Index) -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Check local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            htmlElement.classList.remove('dark');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        // Toggle logic
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+    </script>
+</body>
+</html>
