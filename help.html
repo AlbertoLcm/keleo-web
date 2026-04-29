@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-MX" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,30 +30,49 @@
         }
     </script>
     <style>
-        .glass-effect { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .dark .glass-effect { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .glass-effect {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+        }
     </style>
 </head>
-<body class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 overflow-x-hidden flex flex-col min-h-screen">
+
+<body
+    class="font-sans text-gray-700 bg-gray-50 dark:bg-dark-bg dark:text-gray-300 overflow-x-hidden flex flex-col min-h-screen">
     <header>
-        <nav class="fixed w-full z-50 transition-all duration-300 glass-effect border-b border-gray-100 dark:border-dark-border" aria-label="Navegación principal">
+        <nav class="fixed w-full z-50 transition-all duration-300 glass-effect border-b border-gray-100 dark:border-dark-border"
+            aria-label="Navegación principal">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="index.html" class="flex items-center gap-2 group">
                     <img src="assets/keleo.svg" alt="Keleo Logo" class="w-8 h-8">
-                    <span class="text-2xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span class="text-keleo-600 dark:text-keleo-400">App</span></span>
+                    <span class="text-2xl font-bold text-gray-800 dark:text-white tracking-tight">Keleo<span
+                            class="text-keleo-600 dark:text-keleo-400">App</span></span>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html#soluciones" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium">Beneficios</a>
-                    <a href="index.html#funciones" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium">Funciones</a>
-                    <a href="index.html#precios" class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium">Precios</a>
+                    <a href="index.html#soluciones"
+                        class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium">Beneficios</a>
+                    <a href="index.html#funciones"
+                        class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium">Funciones</a>
+                    <a href="index.html#precios"
+                        class="text-gray-600 dark:text-gray-300 hover:text-keleo-600 dark:hover:text-keleo-400 font-medium">Precios</a>
                 </div>
                 <div class="flex items-center gap-4">
-                    <button id="theme-toggle" class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition">
+                    <button id="theme-toggle"
+                        class="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition">
                         <i id="theme-icon" class="fas fa-moon"></i>
                     </button>
                     <div class="hidden md:flex items-center gap-4">
-                        <a href="https://app.keleo.app" class="text-gray-600 dark:text-gray-300 font-semibold hover:text-keleo-600 transition">Iniciar Sesión</a>
-                        <a href="index.html#precios" class="px-6 py-2.5 bg-keleo-600 text-white font-semibold rounded-xl hover:bg-keleo-700 transition">Comenzar Gratis</a>
+                        <a href="https://app.keleo.app"
+                            class="text-gray-600 dark:text-gray-300 font-semibold hover:text-keleo-600 transition">Iniciar
+                            Sesión</a>
+                        <a href="index.html#precios"
+                            class="px-6 py-2.5 bg-keleo-600 text-white font-semibold rounded-xl hover:bg-keleo-700 transition">Comenzar
+                            Gratis</a>
                     </div>
                 </div>
             </div>
@@ -61,31 +81,48 @@
 
     <main class="flex-1 pt-32 pb-20">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-keleo-600 to-keleo-400">Centro de Ayuda</h1>
-            
+            <h1
+                class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-keleo-600 to-keleo-400">
+                Centro de Ayuda</h1>
+
             <div class="grid gap-6 md:grid-cols-2">
-                <div class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
-                    <div class="w-12 h-12 bg-keleo-100 dark:bg-keleo-900/40 text-keleo-600 dark:text-keleo-400 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-rocket"></i></div>
+                <div
+                    class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div
+                        class="w-12 h-12 bg-keleo-100 dark:bg-keleo-900/40 text-keleo-600 dark:text-keleo-400 rounded-full flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-rocket"></i></div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Primeros Pasos</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm">Aprende a configurar tu restaurante, crear tu menú, gestionar tus primeras mesas y agregar empleados al sistema.</p>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Aprende a configurar tu restaurante, crear tu
+                        menú, gestionar tus primeras mesas y agregar empleados al sistema.</p>
                 </div>
-                
-                <div class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-box"></i></div>
+
+                <div
+                    class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div
+                        class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-box"></i></div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Inventario</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm">Descubre cómo enlazar ingredientes a recetas, registrar mermas y configurar alertas de stock mínimo.</p>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Descubre cómo enlazar ingredientes a recetas,
+                        registrar mermas y configurar alertas de stock mínimo.</p>
                 </div>
 
-                <div class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
-                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-file-invoice-dollar"></i></div>
+                <div
+                    class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div
+                        class="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mb-4 text-xl">
+                        <i class="fas fa-file-invoice-dollar"></i></div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Caja y Facturación</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm">Realiza cortes de caja sin errores y emite facturas electrónicas a tus clientes en segundos.</p>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Realiza cortes de caja sin errores y emite
+                        facturas electrónicas a tus clientes en segundos.</p>
                 </div>
 
-                <div class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border text-center border-keleo-300 dark:border-keleo-800 flex flex-col items-center justify-center">
+                <div
+                    class="bg-white dark:bg-dark-card p-6 rounded-2xl shadow-sm border text-center border-keleo-300 dark:border-keleo-800 flex flex-col items-center justify-center">
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">¿Necesitas soporte técnico?</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Nuestro equipo atiende tus dudas rápidamente.</p>
-                    <a href="https://wa.me/525529937998" target="_blank" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition flex items-center gap-2">
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Nuestro equipo atiende tus dudas
+                        rápidamente.</p>
+                    <a href="https://wa.me/525632109666" target="_blank"
+                        class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition flex items-center gap-2">
                         <i class="fab fa-whatsapp text-xl"></i> Escríbenos por WhatsApp
                     </a>
                 </div>
@@ -99,9 +136,11 @@
                 <div class="md:col-span-2">
                     <a href="index.html" class="flex items-center gap-2 mb-4">
                         <img src="assets/keleo.svg" alt="Keleo Logo" class="w-8 h-8">
-                        <span class="text-2xl font-bold text-white tracking-tight">Keleo<span class="text-keleo-500">App</span></span>
+                        <span class="text-2xl font-bold text-white tracking-tight">Keleo<span
+                                class="text-keleo-500">App</span></span>
                     </a>
-                    <p class="text-sm max-w-sm mb-6">El Software de Punto de Venta (POS) en la nube que centraliza y optimiza la operación de negocios gastronómicos.</p>
+                    <p class="text-sm max-w-sm mb-6">El Software de Punto de Venta (POS) en la nube que centraliza y
+                        optimiza la operación de negocios gastronómicos.</p>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Legal & Ayuda</h4>
@@ -118,10 +157,11 @@
         </div>
     </footer>
     <script>
-        const themeToggleBtn=document.getElementById('theme-toggle'),themeIcon=document.getElementById('theme-icon'),htmlElement=document.documentElement,savedTheme=localStorage.getItem('theme'),systemPrefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
-        function applyDarkTheme(isDark){htmlElement.classList.toggle('dark',isDark);themeIcon.className=isDark?'fas fa-sun':'fas fa-moon';}
-        applyDarkTheme(savedTheme==='dark'||(!savedTheme&&systemPrefersDark));
-        themeToggleBtn.addEventListener('click',()=>{const isDark=!htmlElement.classList.contains('dark');applyDarkTheme(isDark);localStorage.setItem('theme',isDark?'dark':'light');});
+        const themeToggleBtn = document.getElementById('theme-toggle'), themeIcon = document.getElementById('theme-icon'), htmlElement = document.documentElement, savedTheme = localStorage.getItem('theme'), systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        function applyDarkTheme(isDark) { htmlElement.classList.toggle('dark', isDark); themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+        applyDarkTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
+        themeToggleBtn.addEventListener('click', () => { const isDark = !htmlElement.classList.contains('dark'); applyDarkTheme(isDark); localStorage.setItem('theme', isDark ? 'dark' : 'light'); });
     </script>
 </body>
+
 </html>
